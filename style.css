@@ -1,0 +1,147 @@
+@import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Roboto:900,400,700,400italic,900italic,700italic,500italic,300italic,500,300,100,100italic|Roboto+Condensed:300italic,400italic,700italic,400,700,300);
+html {
+	height: 100%;
+	font-family: 'Roboto'
+}
+body { 
+	margin: auto;
+	
+}
+.toolbar {
+	position: fixed;
+	right:10px;
+	top:10px;
+}
+.toolbar ul.user {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.toolbar ul.user li {
+	float: left;
+}
+.toolbar ul.user li a {
+	font-size: 19px;
+	color: rgba(0,0,0,.6);
+	text-decoration: none;
+	padding:5px;
+}
+.toolbar ul.user li a:hover {
+	text-decoration: underline;
+}
+main {
+	background: white;
+	width:100%;
+	display: table;
+}
+header {
+	width: 100%;
+	height: 400px;
+	background: #c644fc;
+	display: table;
+	/*border-radius:50px 50px 0px 0px;*/
+}
+header .start {
+	display: table;
+	margin: auto;
+	width: 375px;
+}
+header span {
+	font-size: 55px;
+	line-height: 55px;
+	font-weight: 700;
+	color: white;
+	opacity: .7;
+	letter-spacing: 2px;
+	display: table;
+	margin: auto;
+}
+header span:first-child {
+	float:left;
+}
+header span:last-child {
+	float:right;
+}
+header .logo {
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+	font-family: 'Rajdhani';
+	clear: both;
+}
+header .logo a {
+	display: table;
+	margin: auto;
+	font-size: 75px;
+	line-height: 75px;
+	font-weight: 700;
+	color: white;
+	text-decoration: none;
+}
+.inner {
+	width:90%;
+	max-width: 1200px;
+	max-width: 500px;
+	display: table;
+	margin: auto;
+}
+section {
+	width: 100%;
+}
+.triptych {
+	margin:40px 0;
+	-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+
+}
+.triptych .box {
+	
+}
+.triptych .box h1 {
+	display: table;
+	margin: 0 auto 15px auto;
+	font-weight: 100;
+	font-size: 55px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+.triptych .box .img {
+	width: 150px;
+	height: 150px;
+	border:4px solid #c644fc;
+	border-radius: 100%;
+	margin: 20px auto;
+	display: table;
+}
+.triptych .box span {
+	text-align: center;
+	display: table;
+	margin: auto;
+	font-weight: 400;
+	font-size: 15px;
+}
+.pic {
+	position: relative;
+	background: url('img/grass.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 500px;
+}
+.pic h1 {
+	width:50%;
+	position: absolute;
+	top:20px;
+	right:20px;
+	text-align: right;
+	font-size: 65px;
+	font-weight: 700;
+	line-height: 65px;
+	margin: 0;
+	color: white;
+	text-shadow: 0px 0px 10px rgba(0,0,0,.6);
+}
+
+
+
