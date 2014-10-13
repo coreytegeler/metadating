@@ -1,13 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Roboto:900,400,700,400italic,900italic,700italic,500italic,300italic,500,300,100,100italic|Roboto+Condensed:300italic,400italic,700italic,400,700,300);
 html {
 	height: 100%;
-	font-family: 'Roboto'
+	font-family: 'Roboto';
 }
 body { 
 	margin: auto;
 	
 }
 .toolbar {
+	z-index: 999999;
 	position: fixed;
 	right:10px;
 	top:10px;
@@ -19,12 +20,13 @@ body {
 }
 .toolbar ul.user li {
 	float: left;
+	color: rgba(255,255,255,.4);
 }
 .toolbar ul.user li a {
 	font-size: 19px;
-	color: rgba(0,0,0,.6);
 	text-decoration: none;
 	padding:5px;
+	color: rgba(255,255,255,.4);
 }
 .toolbar ul.user li a:hover {
 	text-decoration: underline;
@@ -35,18 +37,24 @@ main {
 	display: table;
 }
 header {
-	width: 100%;
-	height: 400px;
 	background: #c644fc;
 	display: table;
-	/*border-radius:50px 50px 0px 0px;*/
 }
-header .start {
-	display: table;
+header .logo, header .logo a {
+	color: white;
+	text-decoration: none;
+	font-family: 'Rajdhani';
+	font-weight: 700;
+}
+header.big {
+	width: 100%;
+	height: 400px;
+}
+header.big .start {
 	margin: auto;
-	width: 375px;
+	width: 385px;
 }
-header span {
+header.big span {
 	font-size: 55px;
 	line-height: 55px;
 	font-weight: 700;
@@ -56,20 +64,21 @@ header span {
 	display: table;
 	margin: auto;
 }
-header span:first-child {
+header.big span:first-child {
 	float:left;
 }
-header span:last-child {
+header.big span:last-child {
 	float:right;
 }
-header .logo {
-	width: 100%;
+header.big .logo {
+	width: 385px;
 	display: table-cell;
 	vertical-align: middle;
 	font-family: 'Rajdhani';
 	clear: both;
+	text-align: center;
 }
-header .logo a {
+header.big .logo a {
 	display: table;
 	margin: auto;
 	font-size: 75px;
@@ -77,6 +86,63 @@ header .logo a {
 	font-weight: 700;
 	color: white;
 	text-decoration: none;
+}
+header.fixed {
+	z-index: 9999;
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height:50px;
+	transform:translateY(-50px);
+	-o-transform:translateY(-50px);
+	-ms-transform:translateY(-50px);
+	-moz-transform:translateY(-50px);
+	-webkit-transform:translateY(-50px);
+}
+header.fixed.caught {
+	transform:translateY(0px);
+	-o-transform:translateY(0px);
+	-ms-transform:translateY(0px);
+	-moz-transform:translateY(0px);
+	-webkit-transform:translateY(0px);
+}
+header.fixed .middle {
+	display: table-cell;
+	vertical-align: middle;
+	opacity: 0;
+	transition: opacity 100ms ease-in-out;
+	-o-transition: opacity 100ms ease-in-out;
+	-ms-transition: opacity 100ms ease-in-out;
+	-moz-transition: opacity 100ms ease-in-out;
+	-webkit-transition: opacity 100ms ease-in-out;
+}
+header.fixed.caught .middle {
+	opacity: 1;
+}
+header.fixed .logo {
+	float: left;
+	padding:0 10px;
+}
+header.fixed .logo a {
+	font-size: 25px;
+}
+header.fixed ul {
+	padding: 0 0 0 0px;
+	margin: 0;
+	list-style: none;
+	float: left;
+}
+header.fixed ul li {
+	float: left;
+	margin:0 15px;
+}
+header.fixed ul li a {
+	text-decoration: none;
+	font-size: 21px;
+	letter-spacing: .4px;
+	color:white;
+	font-family: 'Roboto Condensed';
 }
 .inner {
 	width:90%;
@@ -123,24 +189,32 @@ section {
 }
 .pic {
 	position: relative;
-	background: url('img/grass.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 500px;
+	height: 600px;
 }
 .pic h1 {
 	width:50%;
 	position: absolute;
-	top:20px;
-	right:20px;
-	text-align: right;
+	
 	font-size: 65px;
 	font-weight: 700;
 	line-height: 65px;
 	margin: 0;
 	color: white;
 	text-shadow: 0px 0px 10px rgba(0,0,0,.6);
+}
+.pic.right h1 {
+	top:20px;
+	right:20px;
+	text-align: right;
+}
+.pic.left h1 {
+	bottom:20px;
+	left:20px;
+	text-align: left;
+	width:40%;
 }
 footer {
 	width: 100%;
