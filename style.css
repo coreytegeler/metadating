@@ -5,12 +5,12 @@ html {
 	text-rendering: optimizeLegibility;
 	margin: 0;
 	padding: 0;
-
+	overflow: hidden;
 }
 body { 
 	margin: 0;
 	padding: 0;
-	background: #e870ac;
+	background: #ee313f;
 }
 .toolbar {
 	z-index: 999999;
@@ -43,11 +43,12 @@ main {
 header {
 	display: table;
 }
-header.big {
+section.intro {
 	width: 100%;
 	padding: 50px 0 80px 0;
+	display: table;
 }
-header.big span {
+section.intro span {
 	font-size: 55px;
 	line-height: 55px;
 	font-weight: 400;
@@ -57,13 +58,52 @@ header.big span {
 	display: table;
 	margin: auto;
 }
-header.big span:first-child {
+section.intro span:first-child {
 	float:left;
 }
-header.big span:last-child {
+section.intro span:last-child {
 	float:right;
 }
-header.big .logo a {
+section.intro .middle {
+	vertical-align: middle;
+	display: table-cell;
+	padding-bottom: 100px;
+}
+section.intro .middle .desc {
+	letter-spacing: 3px;
+	color: white;
+	font-size: 35px;
+	line-height: 35px;
+	font-weight: 200;
+	max-width: 720px;
+	display: table;
+	margin: 20px auto 30px auto;
+	text-align: center;
+	font-style: italic;
+	text-align: justify;
+    text-justify: inter-word;
+}
+section.intro .middle .intro-btns {
+	display: table;
+	margin: 20px auto;
+}
+section.intro .middle .intro-btns .intro-btn {	
+	width: 300px;
+	float: left;
+}
+section.intro .middle .intro-btns .intro-btn a {
+	opacity: 1;
+	display: table;
+	width: auto;
+	margin: auto;
+	color: white;
+	text-decoration: none;
+	font-size: 55px;
+	text-align: center;
+	font-family: 'Rajdhani';
+	border-bottom: 4px solid white;
+}
+section.intro .middle a.logo {
 	width: 100%;
 	max-width: 900px;
 	min-width: 200px;
@@ -75,7 +115,7 @@ header.big .logo a {
 	display: table;
 	margin: auto;
 }
-header.big .logo a img {
+section.intro .middle a.logo img {
 	width: 100%;
 }
 header.fixed {
@@ -92,6 +132,7 @@ header.fixed {
 	-webkit-transform:translateY(-55px);
 	background: #ea6e84;
 	border-bottom: 4px solid white;
+	display: block;
 }
 header.fixed.caught {
 	transform:translateY(0px);
@@ -158,12 +199,13 @@ section {
     column-count: 3;
 }
 .triptych .box {
-	
+	display:inline-block;
 }
 .triptych .box h1 {
+	font-family: 'Rajdhani';
 	display: table;
 	margin: 0 auto 15px auto;
-	font-weight: 100;
+	font-weight: 400;
 	font-size: 55px;
 	letter-spacing: 0px;
 	text-align: center;
@@ -172,11 +214,9 @@ section {
 .triptych .box .img {
 	width: 250px;
 	height: 250px;
-	border:8px solid white;
-	border-radius: 100%;
 	margin: 20px auto;
 	display: table;
-	background-size: 60%;
+	background-size: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
