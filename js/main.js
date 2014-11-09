@@ -2,11 +2,17 @@ $(document).ready(function() {
   
   fit();
   var fromTop = 0;
+  var completeCalled = false;
   $(window).on('mousewheel', function() {
     var scrollY = event.deltaY;
     fromTop = fromTop+scrollY;
     if(fromTop >= 20) {
-      $(window).scrollTop(window.innerHeight);
+      $("html, body").animate({scrollTop: h()}, 400, function(){
+        if(!completeCalled){
+            completeCalled = true;
+            alert('this alert will popup once');
+        }
+      });
     }
   });
 
@@ -43,6 +49,10 @@ function catchHeader() {
 
 function dropHeader() {
   $('header.fixed').removeClass('caught');
+}
+
+function h() {
+  return window.innerHeight;
 }
 
 
