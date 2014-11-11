@@ -52,8 +52,10 @@ function buildCircleMask() {
 
 function fitCam() {
   webcamHeight = webcam.videoHeight;
-  webcamWidth = webcamHeight;
-
+  webcamWidth = webcam.videoWidth;
+  var centerShift = -webcamWidth/2 + 250;
+  $('#webcam').css({x: centerShift});
+  $('#detectionOverlay').css({x: centerShift});
   // webcamRatio = webcamWidth/webcamHeight;
   // console.log(webcamWidth, webcamHeight, webcamRatio);
   // overlay.width(window.innerWidth);
@@ -83,14 +85,14 @@ function initWebcam() {
       var userMedia = Modernizr.prefixed('getUserMedia', navigator);
       userMedia({video:true}, function(localMediaStream) {
         webcam.src = window.URL.createObjectURL(localMediaStream);
-        console.log(webcam);
-        authorize();
         webcam.onloadedmetadata = function(e) {
-          fitCam()
+
+        setTimeout( "$('.inner').addClass('open')", 1000);
+        setTimeout( "authorize()", 1500);
+        fitCam()
           $(window).resize(function() {
             fitCam();
           });
-          
         };
       }, function() {
         console.log('Failed');
@@ -103,7 +105,7 @@ function authorize() {
   tracker.init(pModel);
   tracker.start(webcam);
   positionLoop();
-  drawLoop()
+  drawLoop();
 }
 
 function positionLoop() {

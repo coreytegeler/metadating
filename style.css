@@ -10,7 +10,7 @@ html {
 body { 
 	margin: 0;
 	padding: 0;
-	background: #ee313f;
+	background: #ed1c24;
 }
 main {
 
@@ -28,12 +28,12 @@ section#authorize {
 	vertical-align: middle;
 }
 #detection .inner {
-	display: table;
+	width: 400px;
+	height: 400px;
+	display: block;
 	margin: auto;
-	-webkit-border-radius: 100%;
-	-moz-border-radius: 100%;
-	border-radius: 100%;
 }
+
 #detectionOverlay {
 	position: absolute;
 	display: table;
@@ -46,8 +46,37 @@ section#authorize {
 	min-height: 100%;*/
 }
 #webcam {
-	mask: url('img/circleMask.svg#eMask');
-	-webkit-mask-box-image: url('img/circleMask.svg');
+	position: absolute;
+	z-index: 99;
+	shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+	/*mask: url('img/circleMask.svg#eMask');
+	-webkit-mask-box-image: url('img/circleMask.svg');*/
+}
+.open #webcam {
+	-webkit-animation: openCam 600ms linear 1 forwards;
+}
+@-webkit-keyframes openCam {
+  0% {
+    shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	-webkit-clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(40% at 50% 50%);
+  	-webkit-clip-path: circle(40% at 50% 50%);
+  }
 }
 footer {
 	width: 100%;
