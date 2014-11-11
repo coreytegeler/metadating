@@ -46,9 +46,14 @@ function fitSections() {
   });
 }
 
+function buildCircleMask() {
+  var circle;
+}
+
 function fitCam() {
-  // webcamWidth = webcam.videoWidth;
-  // webcamHeight = webcam.videoHeight;
+  webcamHeight = webcam.videoHeight;
+  webcamWidth = webcamHeight;
+
   // webcamRatio = webcamWidth/webcamHeight;
   // console.log(webcamWidth, webcamHeight, webcamRatio);
   // overlay.width(window.innerWidth);
@@ -78,12 +83,14 @@ function initWebcam() {
       var userMedia = Modernizr.prefixed('getUserMedia', navigator);
       userMedia({video:true}, function(localMediaStream) {
         webcam.src = window.URL.createObjectURL(localMediaStream);
+        console.log(webcam);
+        authorize();
         webcam.onloadedmetadata = function(e) {
           fitCam()
           $(window).resize(function() {
             fitCam();
           });
-          authorize();
+          
         };
       }, function() {
         console.log('Failed');
