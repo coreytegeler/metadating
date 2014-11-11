@@ -25,6 +25,13 @@
 </head>
   <body cz-shortcut-listen="true">
     <main>
+      <header id="logo">
+        <div class="middle">
+          <a href="#">
+            <img src="img/logo.svg"/>
+          </a>
+        </div>
+      </header>
       <section id="authorize">
         <div id="detection">
           <div class="inner">
@@ -33,7 +40,14 @@
             </div>
             <video width="500" height="400" id="webcam" autoplay></video>
           </div>
+          <div id="authTxt">
+            <span>Initializing facial detection...</span>
+            <span>Analyzing data...</span>
+            <span>Authorizing identity...</span>
+            <span>Identity found!</span>
+          </div>
         </div>
+
       </section>
     </main>
     <!-- <footer>

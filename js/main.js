@@ -87,7 +87,21 @@ function initWebcam() {
         webcam.src = window.URL.createObjectURL(localMediaStream);
         webcam.onloadedmetadata = function(e) {
 
-        setTimeout( "$('.inner').addClass('open')", 1000);
+        setTimeout(function() {
+          $('#authorize').addClass('open');
+            $('#authTxt span').each(function(i) {
+              setTimeout(function() {
+                $('#authTxt span:eq('+i+')').css({display:'table'});
+                $('#authTxt span:eq('+(i-1)+')').css({display:'none'});
+              },2000*i);
+            });
+            setTimeout(function() {
+              $('#authorize').addClass('close').delay(600).remove('open');
+            }, 2000*$('#authTxt span').length);
+            
+        },1000);
+
+        setTimeout( "$('header#logo').addClass('fixed');", 800);
         setTimeout( "authorize()", 1500);
         fitCam()
           $(window).resize(function() {

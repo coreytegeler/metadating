@@ -20,6 +20,37 @@ section {
 	display: table;
 	width: 100%;
 }
+header#logo {
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: table;
+	transition: all 400ms ease-in-out;
+	-moz-transition: all 400ms ease-in-out;
+	-webkit-transition: all 400ms ease-in-out;
+}
+header#logo .middle {
+	display: table-cell;
+	vertical-align: middle;
+}
+header#logo .middle a {
+	display: table;
+	margin: auto;
+}
+header#logo .middle a img {
+	width:400px;
+	transition: all 400ms ease-in-out;
+	-moz-transition: all 400ms ease-in-out;
+	-webkit-transition: all 400ms ease-in-out;
+}
+header#logo.fixed {
+	height: 200px;
+}
+header#logo.fixed a img {
+	width:200px;
+}
 section#authorize {
 
 }
@@ -28,7 +59,7 @@ section#authorize {
 	vertical-align: middle;
 }
 #detection .inner {
-	width: 400px;
+	width: 359px;
 	height: 400px;
 	display: block;
 	margin: auto;
@@ -50,11 +81,14 @@ section#authorize {
 	z-index: 99;
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
-	/*mask: url('img/circleMask.svg#eMask');
-	-webkit-mask-box-image: url('img/circleMask.svg');*/
 }
 .open #webcam {
+	animation: openCam 600ms linear 1 forwards;
 	-webkit-animation: openCam 600ms linear 1 forwards;
+}
+.close #webcam {
+	animation: closeCam 600ms linear 1 forwards;
+	-webkit-animation: closeCam 600ms linear 1 forwards;
 }
 @-webkit-keyframes openCam {
   0% {
@@ -77,6 +111,95 @@ section#authorize {
     shape-inside: circle(40% at 50% 50%);
   	-webkit-clip-path: circle(40% at 50% 50%);
   }
+}
+
+@keyframes openCam {
+  0% {
+    shape-inside: circle(0% at 50% 50%);
+  	clip-path: circle(0% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(40% at 50% 50%);
+  	clip-path: circle(40% at 50% 50%);
+  }
+}
+@-webkit-keyframes closeCam {
+  0% {
+    shape-inside: circle(40% at 50% 50%);
+  	-webkit-clip-path: circle(40% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	-webkit-clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+  }
+}
+@keyframes ocloseCam {
+  0% {
+    shape-inside: circle(40% at 50% 50%);
+  	clip-path: circle(40% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(0% at 50% 50%);
+  	clip-path: circle(0% at 50% 50%);
+  }
+}
+
+section#authorize #authTxt {
+	display: table;
+	margin: auto;
+	width: 100%;
+	height: 20px;
+	opacity: 0;
+	position: absolute;
+}
+section#authorize #authTxt span {
+	font-family: 'Rajdhani';
+	font-size:20px;
+	line-height:20px;
+	color: white;
+	padding: 0;
+	margin: auto;
+	font-weight: 400;
+	display: none;
+}
+section#authorize.open #authTxt {
+	opacity: 1;
 }
 footer {
 	width: 100%;
