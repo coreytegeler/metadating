@@ -3,33 +3,14 @@ $(document).ready(function() {
   overlay = $('#detectionOverlay');
   canvas = document.getElementById('face');
   ctx = canvas.getContext('2d');
-  initWebcam();
   fitSections();
   var fromTop = 0;
   var completeCalled = false;
-  $(window).on('mousewheel', function() {
-    var scrollY = event.deltaY;
-    fromTop = fromTop+scrollY;
-    if(fromTop >= 20) {
-      $("html, body").animate({scrollTop: h()}, 400, function(){
-        if(!completeCalled){
-          completeCalled = true;
-          alert('this alert will popup once');
-        }
-      });
-    }
+  $('body').click(function() {
+    instruct();
+    // initWebcam();
   });
 
-  $(window).scroll(function(event) {
-    console.log(event);
-  	var headerCatch = $('header.big').height() - 50;
-  	var top = $(window).scrollTop();
-  	if(top >= headerCatch){
-  		catchHeader();
-  	} else {
-  		dropHeader();
-  	}
-  });
 });
 
 $(window).resize(function() {
@@ -79,7 +60,11 @@ function winH() {
 function winW() {
   return window.innerWidth;
 }
-
+function instruct() {
+  setTimeout( "$('body').addClass('instructions');", 80);
+  $('#logo').attr('src','img/logo-notext.svg');
+  setTimeout( "$('header').addClass('fixed');", 00);
+}
 function initWebcam() {
     if (Modernizr.getusermedia) {
       var userMedia = Modernizr.prefixed('getUserMedia', navigator);
@@ -101,7 +86,7 @@ function initWebcam() {
             
         },1000);
 
-        setTimeout( "$('header#logo').addClass('fixed');", 800);
+        setTimeout( "$('header').addClass('fixed');", 800);
         setTimeout( "authorize()", 1500);
         fitCam()
           $(window).resize(function() {

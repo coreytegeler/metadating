@@ -1,7 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Roboto:900,400,700,400italic,900italic,700italic,500italic,300italic,500,300,100,100italic|Roboto+Condensed:300italic,400italic,700italic,400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Lora:400,700,400italic,700italic);
 html {
 	height: 100%;
-	font-family: 'Roboto';
 	text-rendering: optimizeLegibility;
 	margin: 0;
 	padding: 0;
@@ -11,6 +10,9 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #ed1c24;
+	transition: background 200ms ease;
+	-moz-transition: background 200ms ease;
+	-webkit-transition: background 200ms ease;
 }
 main {
 
@@ -20,36 +22,113 @@ section {
 	display: table;
 	width: 100%;
 }
-header#logo {
+header {
+	z-index: 200;
 	position: fixed;
 	top:0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	display: table;
-	transition: all 400ms ease-in-out;
-	-moz-transition: all 400ms ease-in-out;
-	-webkit-transition: all 400ms ease-in-out;
+	transition: height 400ms ease-in-out, opacity 150ms ease;
+	-moz-transition: height 400ms ease-in-out, opacity 150ms ease;
+	-webkit-transition: height 400ms ease-in-out, opacity 150ms ease;
 }
-header#logo .middle {
+header .middle {
 	display: table-cell;
 	vertical-align: middle;
 }
-header#logo .middle a {
+header .middle a {
 	display: table;
 	margin: auto;
 }
-header#logo .middle a img {
+header .middle a img.logo {
 	width:400px;
 	transition: all 400ms ease-in-out;
 	-moz-transition: all 400ms ease-in-out;
 	-webkit-transition: all 400ms ease-in-out;
 }
-header#logo.fixed {
+.instructions header#text {
+	opacity: 0;
+
+}
+header.fixed {
 	height: 200px;
 }
-header#logo.fixed a img {
+header.fixed a img.logo {
 	width:200px;
+}
+.instructions {
+	background: #e8225b;
+}
+#instructions {
+	position: absolute;
+	bottom: -200%;
+	left:0;
+	width: 100%;
+	height: 100%;
+	transition: all 360ms cubic-bezier(.51,.36,0,1.02);
+	-moz-transition: all 360ms cubic-bezier(.51,.36,0,1.02);
+	-webkit-transition: all 360ms cubic-bezier(.51,.36,0,1.02);
+}
+.instructions #instructions {
+	bottom: 0px;
+	width: 100%;
+	color:white;
+	padding: 0;
+}
+#instructions .content {
+	max-width: 800px;
+	padding: 200px 0 0 0;
+	margin: auto;
+	display: table;
+	overflow-y:scroll;
+}
+#instructions .content .question {
+	margin: 0 0 60px 0;
+}
+#instructions .content .question:nth-child(1) {
+	left:0;
+}
+#instructions .content .question:nth-child(2) {
+	left:100%;
+}
+#instructions .content img.logo#logo-sym {
+	width: 200px;
+	display: table;
+	margin: 30px auto;
+	display:none;
+}
+#instructions p {
+	letter-spacing: .5px;
+	font-family: 'Lora', serif;
+	font-weight: 400;
+	font-size: 28px;
+	text-align: justify;
+    text-justify: inter-word;
+    margin:5px 0 20px 0;
+    display: inline;
+    max-width: 800px;
+}
+#instructions h1 {
+	font-family: 'Rajdhani', serif;
+	font-weight: 600;
+	font-size: 55px;
+	margin: 0 auto 30px auto;
+	padding: 0;
+	display: table;
+}
+#instructions h2 {
+	font-family: 'Lora', serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: 30px;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+#instructions h2::after {
+	content: ' — ';
 }
 section#authorize {
 
