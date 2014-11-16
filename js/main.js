@@ -1,24 +1,19 @@
 $(document).ready(function() {
   webcam = document.getElementById('webcam');
   overlay = $('#detectionOverlay');
-  canvas = document.getElementById('face');
-  ctx = canvas.getContext('2d');
+  face = document.getElementById('face');
+  ctx = face.getContext('2d');
   fitSections();
   var fromTop = 0;
   var completeCalled = false;
   $('body').click(function() {
     instruct();
-    // initWebcam();
+    initWebcam();
   });
-
 });
 
 $(window).resize(function() {
   fitSections();
-});
-
-$(window).on('beforeunload', function(){
-  $(document).scrollTop(0);
 });
 
 function fitSections() {
@@ -27,9 +22,7 @@ function fitSections() {
   });
 }
 
-function buildCircleMask() {
-  var circle;
-}
+
 
 function fitCam() {
   webcamHeight = webcam.videoHeight;
@@ -120,8 +113,8 @@ function positionLoop() {
 
 function drawLoop() {
   requestAnimationFrame(drawLoop);
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  tracker.draw(canvas);
+  ctx.clearRect(0,0,face.width,face.height);
+  tracker.draw(face);
 }
 
 
