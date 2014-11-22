@@ -1,18 +1,43 @@
 // Ported from original Metaball script by SATO Hiroyuki
 // http://park12.wakwak.com/~shp/lc/et/en_aics_script.html
 project.currentStyle = {
-	fillColor: 'white'
+	// fillColor: 'rgba(0,0,0,0)',
+	fillColor: '#ed1c24',
+	strokeColor: 'white',
+	strokeWidth: 10
 };
 
-getPoints();
+function getBallPositions() {
+	ballPositions = [];
+	var rows = Math.round(winH()/300);
+	var cols = Math.round(winW()/300);
+	console.log(rows,cols);
+	var rowWidth = (winH()/rows);
+	var colHeight = (winW()/cols);
+	var offsetX = center1.getDistance(center2);
+	var offsetY = winH() - (colHeight*cols);
+	var x=0;
+	var y=0;
+	for (var i=0;i<cols;i++) {
+		for (var j=0;j<rows;j++) {
+			x=(rowWidth + (rowWidth*i)) - offsetX;
+			y=(colHeight + (colHeight*j)) - offsetY;
+			ballPositions.push([x,y]);
+			console.log(ballPositions);
+		}
+	}
+}
 
-var ballPositions = [[255, 129], [610, 73], [486, 363],
-	[117, 459], [484, 726], [843, 306], [789, 615], [1049, 82],
-	[1292, 428], [1117, 733], [1352, 86], [92, 798]];
+getPoints();
+getBallPositions();
+
+//  var ballPositions = [[255, 129], [610, 73], [486, 363],
+// 	[117, 459], [484, 726], [843, 306], [789, 615], [1049, 82],
+// 	[1292, 428], [1117, 733], [1352, 86], [92, 798]];
 
 var handle_len_rate = 2.4;
 var circlePaths = [];
-var radius = 50;
+var radius = 20;
 for (var i = 0, l = ballPositions.length; i < l; i++) {
 	var circlePath = new Path.Circle({
 		center: ballPositions[i],
@@ -22,7 +47,7 @@ for (var i = 0, l = ballPositions.length; i < l; i++) {
 }
 
 var largeCircle = new Path.Circle({
-	center: [676, 433],
+	center: [window.innerWidth/2,window.innerHeight/2],
 	radius: 100
 });
 circlePaths.push(largeCircle);
@@ -98,15 +123,15 @@ function metaball(ball1, ball2, v, handle_len_rate, maxDistance) {
 	radius2 *= d2;
 
 	var path = new Path({
-		segments: [p1a, p2a, p2b, p1b],
+		segments: [center1, center2],
 		style: ball1.style,
 		closed: true
 	});
 	var segments = path.segments;
-	segments[0].handleOut = getVector(angle1a - pi2, radius1);
-	segments[1].handleIn = getVector(angle2a + pi2, radius2);
-	segments[2].handleOut = getVector(angle2b - pi2, radius2);
-	segments[3].handleIn = getVector(angle1b + pi2, radius1);
+	// segments[0].handleOut = getVector(angle1a - pi2, radius1);
+	// segments[1].handleIn = getVector(angle2a + pi2, radius2);
+	// segments[2].handleOut = getVector(angle2b - pi2, radius2);
+	// segments[3].handleIn = getVector(angle1b + pi2, radius1);
 	return path;
 }
 
@@ -121,4 +146,12 @@ function getVector(radians, length) {
 
 function getPoints() {
 	
+}
+
+function winH() {
+  return window.innerHeight;
+}
+
+function winW() {
+  return window.innerWidth;
 }
