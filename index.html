@@ -9,56 +9,59 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="js/models/model_pca_10_mosse.js" type="text/javascript"></script>
-    <script src="js/models/model_pca_10_svm.js" type="text/javascript"></script>
+    <!-- <script src="js/models/model_pca_10_svm.js" type="text/javascript"></script>
     <script src="js/models/model_pca_20_mosse.js" type="text/javascript"></script>
     <script src="js/models/model_pca_20_svm.js" type="text/javascript"></script>
     <script src="js/models/model_spca_10_svm.js" type="text/javascript"></script>
-    <script src="js/models/model_spca_20_svm.js" type="text/javascript"></script>
+    <script src="js/models/model_spca_20_svm.js" type="text/javascript"></script> -->
 
-    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="js/jquery.transit.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
-    <script src="js/clmtrackr.js" type="text/javascript"></script>
-    <script src="js/modernizr.js" type="text/javascript"></script>
-    <script src="js/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.transit.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="js/clmtrackr.js"></script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/paper.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <!--  <script type="text/paperscript" src="js/nodes.js" canvas="nodes"></script> -->
+    
 </head>
   <body cz-shortcut-listen="true">
     <main>
       <header id="notext">
         <div class="middle">
           <a href="#">
-            <img class="logo" class="center" src="img/logo-notext.svg"/>
+            <img class="logo center" src="img/logo-notext.svg"/>
           </a>
         </div>
         </header>
         <header id="text">
         <div class="middle">
           <a href="#">
-            <img class="logo" class="center" src="img/logo.svg"/>
+            <img class="logo center scan" src="img/logo.svg"/>
           </a>
         </div>
       </header>
+      <canvas id="nodes" background="#ed1c24" resize></canvas>
       <div id="instructions">
         <div class="content">
-          <!-- <img id="logo-sym" src="img/logo-sym-blk.svg"/> -->
             <div class="question">
               <h1 id="what">What is MetaDating?</h1>
-              <p>
+              <span>
                 With 65% of all Human activity now being tracked and analyzied with personal devices and public surveillance, we have the resources to get to know you more than you know yourself! We cross-analyze this information with others of your sexual preference to find your perfect match.
-              </p>
+              </span>
             </div>
             <div class="question">
-              <h1 id="how">How to MetaDate</h1>
-              <h2>Confirm your identity</h2>
-              <p>
+              <h1 id="how">How do I MetaDate?</h1>
+              <span>
+                <h2>Confirm your identity</h2>
                 When you're ready, allow us to access your webcam and sit still with your face in the circle so we can use our facial recognition system to match you with your metadata that we already own!
-              </p>
+              </span>
               <br><br>
-              <h2>Let us find your match</h2>
-              <p>
+              <span>
+                <h2>Let us find your match</h2>
                 After confirming who you are, we use your data and quickly find your most ideal partner, 98% accurate and judgement free!
-              </p>
+              </span>
             </div>
           </div>
         </div>
@@ -81,17 +84,18 @@
 
       </section>
     </main>
-    <!-- <footer>
+    <footer>
+      <div class="toggle"></div>
       <div class="links">
-      <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Support</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Legal</a></li>
-        <li>MetaDating © 2014</li>
-      </ul>
+        <ul>
+          <li><a class="help" href="#">About</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Legal</a></li>
+          <!-- <li>MetaDating © 2014</li> -->
+        </ul>
       </div>
-    </footer> -->
+    </footer>
   </body>
 </html>

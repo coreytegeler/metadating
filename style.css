@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Lora:400,700,400italic,700italic);
 
 @font-face {
@@ -30,9 +31,12 @@
     font-style: normal;
 }
 
+=======
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,greek-ext,devanagari,cyrillic,latin-ext,vietnamese,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Noto+Serif:400,700,400italic,700italic|Droid+Serif:400,700,400italic,700italic|Quando);
+>>>>>>> master
 html {
 	height: 100%;
-	text-rendering: optimizeLegibility;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -44,6 +48,10 @@ body {
 	transition: background 200ms ease;
 	-moz-transition: background 200ms ease;
 	-webkit-transition: background 200ms ease;
+	
+}
+body * {
+	text-rendering: geometricPrecision;
 }
 main {
 
@@ -89,18 +97,32 @@ header.fixed {
 header.fixed a img.logo {
 	width:200px;
 }
+.instructions header a img.logo {
+
+}
+
+canvas#nodes {
+	position: fixed;
+	z-index: 9000;
+}
+
+
 .instructions {
-	background: #e8225b;
+	background: #fc3586;
 }
 #instructions {
 	position: absolute;
 	bottom: -200%;
 	left:0;
+	z-index: 200;
 	width: 100%;
 	height: 100%;
 	transition: all 360ms cubic-bezier(.51,.36,0,1.02);
 	-moz-transition: all 360ms cubic-bezier(.51,.36,0,1.02);
 	-webkit-transition: all 360ms cubic-bezier(.51,.36,0,1.02);
+	transform-style: preserve-3d;
+	perspective: 1000px;
+	overflow-y:scroll;
 }
 .instructions #instructions {
 	bottom: 0px;
@@ -110,10 +132,26 @@ header.fixed a img.logo {
 }
 #instructions .content {
 	max-width: 800px;
-	padding: 200px 0 0 0;
-	margin: auto;
+	background: #fc3586;
+	box-shadow: 0 0 100px 80px #fc3586;
+	-moz-box-shadow: 0 0 100px 80px #fc3586;
+	-webkit-box-shadow: 0 0 100px 80px #fc3586;
+	max-width: 800px;
+	margin: 200px auto 0 auto;
 	display: table;
-	overflow-y:scroll;
+	
+	transition: transform 360ms cubic-bezier(.51,.36,0,1.02);
+	-moz-transition: transform 360ms cubic-bezier(.51,.36,0,1.02);
+	-webkit-transition: transform 360ms cubic-bezier(.51,.36,0,1.02);
+
+	transform: rotateX(50deg) scale(1.2);
+	-moz-transform: rotateX(50deg) scale(1.2);
+	-webkit-transform: rotateX(50deg) scale(1.2);
+}
+.instructions #instructions .content {
+	transform: rotateX(0deg) scale(1);
+	-moz-transform: rotateX(0deg) scale(1);
+	-webkit-transform: rotateX(0deg) scale(1);
 }
 #instructions .content .question {
 	margin: 0 0 60px 0;
@@ -130,30 +168,26 @@ header.fixed a img.logo {
 	margin: 30px auto;
 	display:none;
 }
-#instructions p {
-	letter-spacing: .5px;
-	font-family: 'Lora', serif;
-	font-weight: 400;
-	font-size: 28px;
-	text-align: justify;
-    text-justify: inter-word;
-    margin:5px 0 20px 0;
-    display: inline;
-    max-width: 800px;
-}
 #instructions h1 {
-	font-family: 'Rajdhani', serif;
-	font-weight: 600;
+	font-family: 'Noto Sans', serif;
+	font-weight: 700;
 	font-size: 55px;
 	margin: 0 auto 30px auto;
 	padding: 0;
 	display: table;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 #instructions h2 {
-	font-family: 'Lora', serif;
+	font-family: 'Quando', serif;
 	font-weight: 400;
 	font-style: italic;
-	font-size: 30px;
+	font-size: 22px;
 	margin: 0;
 	padding: 0;
 	display: inline;
@@ -161,6 +195,25 @@ header.fixed a img.logo {
 #instructions h2::after {
 	content: ' — ';
 }
+#instructions span {
+	letter-spacing: 1px;
+	font-family: 'Quando', serif;
+	font-weight: 400;
+	font-size: 22px;
+	line-height: 30px;
+	text-align: justify;
+    text-justify: inter-word;
+    margin:5px 0 20px 0;
+    display: inline-block;
+    max-width: 800px;
+}
+#instructions span::selection {
+  background: #ed1c24;
+}
+#instructions span::-moz-selection {
+  background: #ed1c24;
+}
+
 section#authorize {
 
 }
@@ -299,7 +352,7 @@ section#authorize #authTxt {
 	position: absolute;
 }
 section#authorize #authTxt span {
-	font-family: 'Rajdhani';
+	font-family: 'Noto Sans', serif;
 	font-size:20px;
 	line-height:20px;
 	color: white;
@@ -312,14 +365,55 @@ section#authorize.open #authTxt {
 	opacity: 1;
 }
 footer {
+	position: absolute;
+	bottom:0px;
+	left:0;
+	z-index: 9000;
 	width: 100%;
-	height: 130px;
+	padding-top:100px;
+	height: 150px;
 	display: table;
-	background: white;
+	transform:translateY(150px);
+	-moz-transform:translateY(150px);
+	-webkit-transform:translateY(150px);
+
+	transition: transform 160ms cubic-bezier(.51,.36,0,1.02);
+	-moz-transition: -moz-transform 160ms cubic-bezier(.51,.36,0,1.02);
+	-webkit-transition: -webkit-transform 160ms cubic-bezier(.51,.36,0,1.02);
+}
+footer.show {
+	transform:translateY(0px);
+	-moz-transform:translateY(0px);
+	-webkit-transform:translateY(0px);
+}
+footer .toggle {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	cursor: pointer;
 }
 footer .links {
+	box-shadow: 0 0 100px 50px #fc3586;
+	-moz-box-shadow: 0 0 100px 50px #fc3586;
+	-webkit-box-shadow: 0 0 100px 50px #fc3586;
 	display: table-cell;
 	vertical-align: middle;
+	background: #fc3586;
+	transition: box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
+	-moz-transition: -moz-box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
+	-webkit-transition: -webkit-box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
+}
+footer:hover .links {
+	box-shadow: 0 0 100px 100px #fc3586;
+	-moz-box-shadow: 0 0 100px 100px #fc3586;
+	-webkit-box-shadow: 0 0 100px 100px #fc3586;
+
+	transition: box-shadow 1560ms cubic-bezier(.51,.36,0,1.02);
+	-moz-transition: -moz-box-shadow 1560ms cubic-bezier(.51,.36,0,1.02);
+	-webkit-transition: -webkit-box-shadow 1560ms cubic-bezier(.51,.36,0,1.02);
 }
 footer .links ul {
 	display: table;
@@ -329,20 +423,24 @@ footer .links ul {
 }
 footer .links ul li {
 	float: left;
-	padding: 10px 10px;
-	font-size: 15px;
-	color:rgba(0,0,0,.3);
-}
-footer .links ul li:last-child {
-	float: none;
-	clear: both;
-	width: 100%;
-	text-align: center;
+	padding: 10px 30px;
 }
 footer .links ul li a {
-	color:rgba(0,0,0,.5);
+	color:rgba(255,255,255,1);
 	text-decoration: none;
+	font-size: 25px;
+	font-family: 'Noto Sans', serif;
+	font-weight: 400;
+	letter-spacing: 1px;
+	transition: all 200ms ease-in-out !important;
+	-moz-transition: all 200ms ease-in-out !important;
+	-webkit-transition: all 200ms ease-in-out !important;
 }
 footer .links ul li a:hover {
-	color:rgba(0,0,0,.8);
+	color:rgba(255,255,255,.85);
+}
+footer.show .links {
+	box-shadow: 0 0 100px 80px #fc3586;
+	-moz-box-shadow: 0 0 100px 80px #fc3586;
+	-webkit-box-shadow: 0 0 100px 80px #fc3586;
 }

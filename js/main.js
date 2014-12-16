@@ -1,24 +1,29 @@
 $(document).ready(function() {
   webcam = document.getElementById('webcam');
   overlay = $('#detectionOverlay');
-  canvas = document.getElementById('face');
-  ctx = canvas.getContext('2d');
+  face = document.getElementById('face');
+  ctx = face.getContext('2d');
   fitSections();
   var fromTop = 0;
   var completeCalled = false;
-  $('body').click(function() {
-    instruct();
-    // initWebcam();
+
+  $('.scan').click(function() {
+    initWebcam();
   });
 
+  $('.help').click(function() {
+    instruct();
+  });
+
+  $('footer .toggle').click(function() {
+    $('footer').toggleClass('show');
+  });
 });
+
+
 
 $(window).resize(function() {
   fitSections();
-});
-
-$(window).on('beforeunload', function(){
-  $(document).scrollTop(0);
 });
 
 function fitSections() {
@@ -27,9 +32,7 @@ function fitSections() {
   });
 }
 
-function buildCircleMask() {
-  var circle;
-}
+
 
 function fitCam() {
   webcamHeight = webcam.videoHeight;
@@ -61,9 +64,18 @@ function winW() {
   return window.innerWidth;
 }
 function instruct() {
-  setTimeout( "$('body').addClass('instructions');", 80);
-  $('#logo').attr('src','img/logo-notext.svg');
-  setTimeout( "$('header').addClass('fixed');", 00);
+  var instruct = $('body').hasClass('instructions');
+
+  if(instruct) {
+    setTimeout( "$('body').removeClass('instructions');", 80);
+    $('#logo').attr('src','img/logo.svg');
+    setTimeout( "$('header').removeClass('fixed');", 00);
+  } else {
+    setTimeout( "$('body').addClass('instructions');", 80);
+    $('#logo').attr('src','img/logo-notext.svg');
+    setTimeout( "$('header').addClass('fixed');", 00);
+  }
+
 }
 function initWebcam() {
     if (Modernizr.getusermedia) {
@@ -88,7 +100,7 @@ function initWebcam() {
 
         setTimeout( "$('header').addClass('fixed');", 800);
         setTimeout( "authorize()", 1500);
-        fitCam()
+        fitCam();
           $(window).resize(function() {
             fitCam();
           });
@@ -120,8 +132,8 @@ function positionLoop() {
 
 function drawLoop() {
   requestAnimationFrame(drawLoop);
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  tracker.draw(canvas);
+  ctx.clearRect(0,0,face.width,face.height);
+  tracker.draw(face);
 }
 
 
