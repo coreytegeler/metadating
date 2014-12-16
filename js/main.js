@@ -6,11 +6,21 @@ $(document).ready(function() {
   fitSections();
   var fromTop = 0;
   var completeCalled = false;
-  $('body').click(function() {
-    instruct();
+
+  $('.scan').click(function() {
     initWebcam();
   });
+
+  $('.help').click(function() {
+    instruct();
+  });
+
+  $('footer .toggle').click(function() {
+    $('footer').toggleClass('show');
+  });
 });
+
+
 
 $(window).resize(function() {
   fitSections();
@@ -54,9 +64,18 @@ function winW() {
   return window.innerWidth;
 }
 function instruct() {
-  setTimeout( "$('body').addClass('instructions');", 80);
-  $('#logo').attr('src','img/logo-notext.svg');
-  setTimeout( "$('header').addClass('fixed');", 00);
+  var instruct = $('body').hasClass('instructions');
+
+  if(instruct) {
+    setTimeout( "$('body').removeClass('instructions');", 80);
+    $('#logo').attr('src','img/logo.svg');
+    setTimeout( "$('header').removeClass('fixed');", 00);
+  } else {
+    setTimeout( "$('body').addClass('instructions');", 80);
+    $('#logo').attr('src','img/logo-notext.svg');
+    setTimeout( "$('header').addClass('fixed');", 00);
+  }
+
 }
 function initWebcam() {
     if (Modernizr.getusermedia) {
@@ -81,7 +100,7 @@ function initWebcam() {
 
         setTimeout( "$('header').addClass('fixed');", 800);
         setTimeout( "authorize()", 1500);
-        fitCam()
+        fitCam();
           $(window).resize(function() {
             fitCam();
           });
