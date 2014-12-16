@@ -1,4 +1,35 @@
 @import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Lora:400,700,400italic,700italic|Crimson+Text:400,700italic,700,600italic,400italic,600);
+
+@font-face {
+  font-family: 'dia';
+  src: url('fonts/dia-black.eot?') format('eot'),
+       url('fonts/dia-black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'trio-grotesk';
+    src: url('fonts/trio-grotesk-normal.eot?') format('eot'),
+         url('fonts/trio-grotesk-normal.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'trio-grotesk';
+    src: url('fonts/trio-grotesk-medium.eot?') format('eot'),
+         url('fonts/trio-grotesk-medium.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'trio-grotesk';
+    src: url('fonts/trio-grotesk-bold.eot?') format('eot'),
+         url('fonts/trio-grotesk-bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
 html {
 	height: 100%;
 	margin: 0;
