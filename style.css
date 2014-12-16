@@ -1,35 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Lora:400,700,400italic,700italic|Crimson+Text:400,700italic,700,600italic,400italic,600);
-
-@font-face {
-  font-family: 'dia';
-  src: url('fonts/dia-black.eot?') format('eot'),
-       url('fonts/dia-black.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
-    font-family: 'trio-grotesk';
-    src: url('fonts/trio-grotesk-normal.eot?') format('eot'),
-         url('fonts/trio-grotesk-normal.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'trio-grotesk';
-    src: url('fonts/trio-grotesk-medium.eot?') format('eot'),
-         url('fonts/trio-grotesk-medium.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'trio-grotesk';
-    src: url('fonts/trio-grotesk-bold.eot?') format('eot'),
-         url('fonts/trio-grotesk-bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-}
-
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,greek-ext,devanagari,cyrillic,latin-ext,vietnamese,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Noto+Serif:400,700,400italic,700italic|Droid+Serif:400,700,400italic,700italic|Quando);
 html {
 	height: 100%;
 	margin: 0;
@@ -46,7 +16,7 @@ body {
 	
 }
 body * {
-	text-rendering: optimizeLegibility;
+	text-rendering: geometricPrecision;
 }
 main {
 
@@ -164,8 +134,8 @@ canvas#nodes {
 	display:none;
 }
 #instructions h1 {
-	font-family: 'Rajdhani', serif;
-	font-weight: 600;
+	font-family: 'Noto Sans', serif;
+	font-weight: 700;
 	font-size: 55px;
 	margin: 0 auto 30px auto;
 	padding: 0;
@@ -179,11 +149,10 @@ canvas#nodes {
     cursor: default;
 }
 #instructions h2 {
-	font-family: 'Crimson Text', serif;
+	font-family: 'Quando', serif;
 	font-weight: 400;
 	font-style: italic;
-	font-size: 35px;
-	letter-spacing: 2px;
+	font-size: 22px;
 	margin: 0;
 	padding: 0;
 	display: inline;
@@ -193,9 +162,9 @@ canvas#nodes {
 }
 #instructions span {
 	letter-spacing: 1px;
-	font-family: 'Crimson Text', serif;
+	font-family: 'Quando', serif;
 	font-weight: 400;
-	font-size: 28px;
+	font-size: 22px;
 	line-height: 30px;
 	text-align: justify;
     text-justify: inter-word;
@@ -348,7 +317,7 @@ section#authorize #authTxt {
 	position: absolute;
 }
 section#authorize #authTxt span {
-	font-family: 'Rajdhani';
+	font-family: 'Noto Sans', serif;
 	font-size:20px;
 	line-height:20px;
 	color: white;
@@ -369,7 +338,6 @@ footer {
 	padding-top:100px;
 	height: 150px;
 	display: table;
-	font-family: 'Rajdhani';
 	transform:translateY(150px);
 	-moz-transform:translateY(150px);
 	-webkit-transform:translateY(150px);
@@ -399,7 +367,6 @@ footer .links {
 	display: table-cell;
 	vertical-align: middle;
 	background: #fc3586;
-
 	transition: box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
 	-moz-transition: -moz-box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
 	-webkit-transition: -webkit-box-shadow 460ms cubic-bezier(.51,.36,0,1.02);
@@ -422,20 +389,17 @@ footer .links ul {
 footer .links ul li {
 	float: left;
 	padding: 10px 30px;
-	color:rgba(255,255,255,.6);
-	font-size: 30px;
-	font-weight: 500;
 }
-/*footer .links ul li:last-child {
-	float: none;
-	clear: both;
-	width: 100%;
-	text-align: center;
-}*/
 footer .links ul li a {
 	color:rgba(255,255,255,1);
 	text-decoration: none;
-	font-size: 40px;
+	font-size: 25px;
+	font-family: 'Noto Sans', serif;
+	font-weight: 400;
+	letter-spacing: 1px;
+	transition: all 200ms ease-in-out !important;
+	-moz-transition: all 200ms ease-in-out !important;
+	-webkit-transition: all 200ms ease-in-out !important;
 }
 footer .links ul li a:hover {
 	color:rgba(255,255,255,.85);
