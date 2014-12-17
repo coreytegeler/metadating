@@ -8,11 +8,13 @@ $(document).ready(function() {
   var completeCalled = false;
 
   $('.scan').click(function() {
-    initWebcam();
+      initWebcam();
+      $('.scan').off();
   });
 
-  $('.help').click(function() {
-    instruct();
+  $('.slideLink').click(function() {
+    var section = $('.slideLink').data('section');
+    openSlide(section);
   });
 
   $('footer .toggle').click(function() {
@@ -31,8 +33,6 @@ function fitSections() {
     $(this).height(window.innerHeight);
   });
 }
-
-
 
 function fitCam() {
   webcamHeight = webcam.videoHeight;
@@ -63,19 +63,24 @@ function winH() {
 function winW() {
   return window.innerWidth;
 }
-function instruct() {
-  var instruct = $('body').hasClass('instructions');
+function openSlide(section) {
+  $slide = $('.slide#'+section);
+  
+  var open = $slide.hasClass('open');
 
-  if(instruct) {
-    setTimeout( "$('body').removeClass('instructions');", 80);
-    $('#logo').attr('src','img/logo.svg');
-    setTimeout( "$('header').removeClass('fixed');", 00);
+  if(open) {
+    $slide.removeClass('open');
+    setTimeout( "$('body').removeClass('openSlide');", 80);
+    if(!$('body').hasClass('authorize')) {
+      $('#logo').attr('src','img/logo.svg');
+      $('header').removeClass('fixed');
+    }
   } else {
-    setTimeout( "$('body').addClass('instructions');", 80);
+    $slide.addClass('open');
+    setTimeout( "$('body').addClass('openSlide');", 80);
     $('#logo').attr('src','img/logo-notext.svg');
-    setTimeout( "$('header').addClass('fixed');", 00);
+    $('header').addClass('fixed');
   }
-
 }
 function initWebcam() {
     if (Modernizr.getusermedia) {
@@ -85,6 +90,7 @@ function initWebcam() {
         webcam.onloadedmetadata = function(e) {
 
         setTimeout(function() {
+          $('body').addClass('authorize');
           $('#authorize').addClass('open');
             $('#authTxt span').each(function(i) {
               setTimeout(function() {
@@ -93,7 +99,11 @@ function initWebcam() {
               },2000*i);
             });
             setTimeout(function() {
-              $('#authorize').addClass('close').delay(600).remove('open');
+              $('#authorize').addClass('close').delay(600).removeClass('open');
+              setTimeout(function() {
+                $('#authorize').remove();
+                $('body').removeClass('authorize');
+              },600);
             }, 2000*$('#authTxt span').length);
             
         },1000);

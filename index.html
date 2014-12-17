@@ -43,29 +43,39 @@
         </div>
       </header>
       <canvas id="nodes" background="#ed1c24" resize></canvas>
-      <div id="instructions">
-        <div class="content">
-            <div class="question">
-              <h1 id="what">What is MetaDating?</h1>
-              <span>
-                With 65% of all Human activity now being tracked and analyzied with personal devices and public surveillance, we have the resources to get to know you more than you know yourself! We cross-analyze this information with others of your sexual preference to find your perfect match.
-              </span>
-            </div>
-            <div class="question">
-              <h1 id="how">How do I MetaDate?</h1>
-              <span>
-                <h2>Confirm your identity</h2>
-                When you're ready, allow us to access your webcam and sit still with your face in the circle so we can use our facial recognition system to match you with your metadata that we already own!
-              </span>
-              <br><br>
-              <span>
-                <h2>Let us find your match</h2>
-                After confirming who you are, we use your data and quickly find your most ideal partner, 98% accurate and judgement free!
-              </span>
+      <div id="slides">
+        <div id="about"  class="slide">
+          <div class="content">
+              <div class="question">
+                <h1 id="what">What is MetaDating?</h1>
+                <span>
+                  With 65% of all Human activity now being tracked and analyzied with personal devices and public surveillance, we have the resources to get to know you more than you know yourself! We cross-analyze this information with others of your sexual preference to find your perfect match.
+                </span>
+              </div>
+              <div class="question">
+                <h1 id="how">How do I MetaDate?</h1>
+                <span>
+                  <h2>Confirm your identity</h2>
+                  When you're ready, allow us to access your webcam and sit still with your face in the circle so we can use our facial recognition system to match you with your metadata that we already own!
+                </span>
+                <br><br>
+                <span>
+                  <h2>Let us find your match</h2>
+                  After confirming who you are, we use your data and quickly find your most ideal partner, 98% accurate and judgement free!
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- <div id="support" class="slide">
+        <div class="content">
+
+        </div>
+      </div>
+ -->
+
       <section id="authorize">
         <div id="detection">
           <div class="inner">
@@ -88,11 +98,11 @@
       <div class="toggle"></div>
       <div class="links">
         <ul>
-          <li><a class="help" href="#">About</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press</a></li>
-          <li><a href="#">Legal</a></li>
+          <li><a class="slideLink" data-section="about" href="#">About</a></li>
+          <li><a class="slideLink" data-section="support" href="#">Support</a></li>
+          <li><a class="slideLink" data-section="careers" href="#">Careers</a></li>
+          <li><a class="slideLink" data-section="press" href="#">Press</a></li>
+          <li><a class="slideLink" data-section="legal" href="#">Legal</a></li>
           <!-- <li>MetaDating © 2014</li> -->
         </ul>
       </div>
