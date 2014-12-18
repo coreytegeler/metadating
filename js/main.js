@@ -13,7 +13,7 @@ $(document).ready(function() {
   });
 
   $('.slideLink').click(function() {
-    var section = $('.slideLink').data('section');
+    var section = $(this).data('section');
     openSlide(section);
   });
 
@@ -65,9 +65,8 @@ function winW() {
 }
 function openSlide(section) {
   $slide = $('.slide#'+section);
-  
   var open = $slide.hasClass('open');
-
+console.log($slide);
   if(open) {
     $slide.removeClass('open');
     setTimeout( "$('body').removeClass('openSlide');", 80);

@@ -43,7 +43,26 @@
         </div>
       </header>
       <canvas id="nodes" background="#ed1c24" resize></canvas>
-      <div id="slides">
+      <section id="authorize">
+        <div id="detection">
+          <div class="inner">
+            <div id="detectionOverlay">
+              <canvas width="500" height="400" id="face"></canvas>
+            </div>
+            <video width="500" height="400" id="webcam" autoplay></video>
+          </div>
+          <div id="authTxt">
+            <span>Initializing facial detection...</span>
+            <span>Analyzing data...</span>
+            <span>Authorizing identity...</span>
+            <span>Identity found!</span>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+     <div id="slides">
         <div id="about"  class="slide">
           <div class="content">
               <div class="question">
@@ -66,34 +85,16 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- <div id="support" class="slide">
-        <div class="content">
-
-        </div>
-      </div>
- -->
-
-      <section id="authorize">
-        <div id="detection">
-          <div class="inner">
-            <div id="detectionOverlay">
-              <canvas width="500" height="400" id="face"></canvas>
+        
+          <div id="support" class="slide">
+            <div class="content">
+              <h1>SUPPORT</h1>
             </div>
-            <video width="500" height="400" id="webcam" autoplay></video>
-          </div>
-          <div id="authTxt">
-            <span>Initializing facial detection...</span>
-            <span>Analyzing data...</span>
-            <span>Authorizing identity...</span>
-            <span>Identity found!</span>
           </div>
         </div>
+      </div>
 
-      </section>
-    </main>
+    
     <footer>
       <div class="toggle"></div>
       <div class="links">
