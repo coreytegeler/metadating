@@ -4,6 +4,7 @@ $(document).ready(function() {
   face = document.getElementById('face');
   ctx = face.getContext('2d');
   fitSections();
+  cursor();
   var fromTop = 0;
   var completeCalled = false;
 
@@ -11,13 +12,13 @@ $(document).ready(function() {
     initWebcam();
   });
 
-  $('.help').click(function() {
-    instruct();
+  $('footer .links a').click(function() {
+    openFooter($(this));
   });
 
-  $('footer .toggle').click(function() {
-    $('footer').toggleClass('show');
-  });
+  // $('footer .toggle').click(function() {
+  //   $('footer').toggleClass('show');
+  // });
 });
 
 
@@ -32,20 +33,12 @@ function fitSections() {
   });
 }
 
-
-
 function fitCam() {
   webcamHeight = webcam.videoHeight;
   webcamWidth = webcam.videoWidth;
   var centerShift = -webcamWidth/2 + 250;
   $('#webcam').css({x: centerShift});
   $('#detectionOverlay').css({x: centerShift});
-  // webcamRatio = webcamWidth/webcamHeight;
-  // console.log(webcamWidth, webcamHeight, webcamRatio);
-  // overlay.width(window.innerWidth);
-  // overlay.height(Math.round(window.innerWidth / webcamRatio));
-  // var top = winW()/2 - overlay.height()/2;
-  // overlay.css({'top': top});
 }
 
 function catchHeader() {
@@ -63,17 +56,42 @@ function winH() {
 function winW() {
   return window.innerWidth;
 }
-function instruct() {
-  var instruct = $('body').hasClass('instructions');
+function openFooter(link) {
+  var selected = link.attr('href').substring(1);
+  var page = $('.footerPage#' + selected);
+  console.log(selected);
 
-  if(instruct) {
-    setTimeout( "$('body').removeClass('instructions');", 80);
-    $('#logo').attr('src','img/logo.svg');
-    setTimeout( "$('header').removeClass('fixed');", 00);
+  var open = $('body').hasClass('openFooter');
+  if(open) {
+    if(page.hasClass('open')) {
+
+      $('.footerPage.open').scrollTop(0);
+
+
+      $('#logo').attr('src','img/logo.svg');
+      $('header').removeClass('fixed');
+      page.removeClass('open');
+      setTimeout(function() {
+        $('body').removeClass('openFooter');
+      }, 80);
+    } else {
+      $('.footerPage.open').removeClass('open');
+      page.addClass('open');
+    }
   } else {
-    setTimeout( "$('body').addClass('instructions');", 80);
     $('#logo').attr('src','img/logo-notext.svg');
-    setTimeout( "$('header').addClass('fixed');", 00);
+    $('header').addClass('fixed');
+    page.addClass('open');
+    setTimeout(function() {
+      $('body').addClass('openFooter');
+    }, 80);
+
+    page.children('.closeBanner').click(function(event) {
+      $('#logo').attr('src','img/logo.svg');
+      $('header').removeClass('fixed');
+      page.removeClass('open');
+      $('body').removeClass('openFooter');
+    });
   }
 
 }
@@ -85,18 +103,22 @@ function initWebcam() {
         webcam.onloadedmetadata = function(e) {
 
         setTimeout(function() {
+          var textLife = 1500;
           $('#authorize').addClass('open');
             $('#authTxt span').each(function(i) {
               setTimeout(function() {
                 $('#authTxt span:eq('+i+')').css({display:'table'});
                 $('#authTxt span:eq('+(i-1)+')').css({display:'none'});
-              },2000*i);
+              },textLife*i);
             });
             setTimeout(function() {
-              $('#authorize').addClass('close').delay(600).remove('open');
-            }, 2000*$('#authTxt span').length);
-            
-        },1000);
+              $('#authorize').addClass('close');
+              setTimeout(function() {
+                tracking = false;
+                $('#authorize').remove();
+              }, 600);
+            }, textLife*$('#authTxt span').length);
+        },1500);
 
         setTimeout( "$('header').addClass('fixed');", 800);
         setTimeout( "authorize()", 1500);
@@ -116,6 +138,7 @@ function authorize() {
   tracker.init(pModel);
   tracker.start(webcam);
   positionLoop();
+  tracking = true;
   drawLoop();
 }
 
@@ -131,9 +154,22 @@ function positionLoop() {
 }
 
 function drawLoop() {
-  requestAnimationFrame(drawLoop);
-  ctx.clearRect(0,0,face.width,face.height);
-  tracker.draw(face);
+  if(tracking) {
+    requestAnimationFrame(drawLoop);
+    ctx.clearRect(0,0,face.width,face.height);
+    tracker.draw(face);
+  } else {
+    tracker.stop();
+    webcam.src="";
+    webcam.remove();
+  }
+}
+
+function cursor() {
+  $('.cursor').hover(function() {
+    var cursor = $(this).data('cursor');
+    console.log(cursor);
+  });
 }
 
 

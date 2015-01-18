@@ -7,28 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MetaDating</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-
-    <script src="js/models/model_pca_10_mosse.js" type="text/javascript"></script>
-    <!-- <script src="js/models/model_pca_10_svm.js" type="text/javascript"></script>
-    <script src="js/models/model_pca_20_mosse.js" type="text/javascript"></script>
     <script src="js/models/model_pca_20_svm.js" type="text/javascript"></script>
-    <script src="js/models/model_spca_10_svm.js" type="text/javascript"></script>
-    <script src="js/models/model_spca_20_svm.js" type="text/javascript"></script> -->
-
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.transit.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" src="js/clmtrackr.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
-    <script type="text/javascript" src="js/paper.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <!--  <script type="text/paperscript" src="js/nodes.js" canvas="nodes"></script> -->
     
 </head>
   <body cz-shortcut-listen="true">
     <main>
-      <header id="notext">
+      <header id="noText">
         <div class="middle">
           <a href="#">
             <img class="logo center" src="img/logo-notext.svg"/>
@@ -42,30 +34,7 @@
           </a>
         </div>
       </header>
-      <canvas id="nodes" background="#ed1c24" resize></canvas>
-      <div id="instructions">
-        <div class="content">
-            <div class="question">
-              <h1 id="what">What is MetaDating?</h1>
-              <span>
-                With 65% of all Human activity now being tracked and analyzied with personal devices and public surveillance, we have the resources to get to know you more than you know yourself! We cross-analyze this information with others of your sexual preference to find your perfect match.
-              </span>
-            </div>
-            <div class="question">
-              <h1 id="how">How do I MetaDate?</h1>
-              <span>
-                <h2>Confirm your identity</h2>
-                When you're ready, allow us to access your webcam and sit still with your face in the circle so we can use our facial recognition system to match you with your metadata that we already own!
-              </span>
-              <br><br>
-              <span>
-                <h2>Let us find your match</h2>
-                After confirming who you are, we use your data and quickly find your most ideal partner, 98% accurate and judgement free!
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- <canvas id="nodes" background="#ed1c24" resize></canvas> -->
       <section id="authorize">
         <div id="detection">
           <div class="inner">
@@ -77,22 +46,89 @@
           <div id="authTxt">
             <span>Initializing facial detection...</span>
             <span>Analyzing data...</span>
+            <span>Connecting to database...</span>
+            <span>Finding possible matches...</span>
             <span>Authorizing identity...</span>
             <span>Identity found!</span>
           </div>
         </div>
-
       </section>
     </main>
+
+    <section id="footerPages">
+        <div class="footerPage" id="about">
+          <div class="closeBanner"></div>
+          <div class="content">
+            <div class="inner">
+              <div class="question">
+                <h1 id="what">What is MetaDating?</h1>
+                <span>
+                  MetaDating is the new standard for finding love. The new act of liberating your heart to soar in the Cloud.
+                </span>
+              </div>
+              <div class="question">
+                <h1 id="what">How does this work?</h1>
+                <span>
+                Ever since we’ve began sharing 64%* of our daily activity with our favorite corporations, they have welcomed this data to get to know us better than we know ourselves! The law insists that we treat these corporate entities as people*, thankfully, they aren’t required to do the same. This allows them, and the software that they run on, to avoid human error and the flaws of the emotionally defective brain, to make programmatic illuminations about each and every one of us. With this insight, services like MetaDating, allow us to thoughtlessly and effortlessly consume media, purchase products, and produce more data, while all of life’s hardships are managed through data-backed analytics and algorithmic decision making tools.
+                </span>
+              </div>
+              <div class="question">
+                <h1 id="how">How do I MetaDate?</h1>
+                <span>
+                  <h2>Confirm your identity</h2>
+                  When you're ready to find your true* match, click START and allow us to access your webcam. Once initiated, sit still with your face in the Cydonia™ circle so we can match you with your available data!
+                </span>
+                <br><br>
+                <span>
+                  <h2>Let us find your match</h2>
+                  After confirming who you are through Cydonia’s™ facial recognition service, we access all of your metadata to discover who you really are. Your optimal romantic partner is out there somewhere, and whether or not they’re looking for you, we’ll find them! 
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footerPage" id="support">
+          <div class="closeBanner"></div>
+          <div class="content">
+            <div class="inner">
+              <h1>Need Help?</h1>
+                <span>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras a viverra justo. Vivamus posuere mattis ex sed faucibus. Cras lorem lacus, egestas et quam a, condimentum vulputate nibh. Fusce lacus felis, vestibulum iaculis tincidunt non, euismod quis arcu. Praesent viverra elit et magna ultricies malesuada eu quis enim. Integer sed suscipit ex. Donec vehicula turpis in magna congue, molestie varius dui interdum. Nulla aliquet vitae quam eget dictum. Mauris eget risus consectetur, imperdiet magna mattis, hendrerit purus. Mauris ut ex sit amet mi sollicitudin varius. Morbi nec luctus metus. In et tellus euismod, mollis ligula nec, gravida dui. Nam at fringilla mi, et hendrerit leo. Donec sed tincidunt urna. Duis bibendum porta augue id ullamcorper.
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="footerPage" id="careers">
+          <div class="closeBanner"></div>
+          <div class="content">
+            <div class="inner">
+            </div>
+          </div>
+        </div>
+        <div class="footerPage" id="press">
+          <div class="closeBanner"></div>
+          <div class="content">
+            <div class="inner">
+            </div>
+          </div>
+        </div>
+        <div class="footerPage" id="legal">
+          <div class="closeBanner"></div>
+          <div class="content">
+            <div class="inner">
+            </div>
+          </div>
+        </div>
+      </section>
     <footer>
-      <div class="toggle"></div>
+      <div class="toggle" data-cursor="up"></div>
       <div class="links">
         <ul>
-          <li><a class="help" href="#">About</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press</a></li>
-          <li><a href="#">Legal</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#careers">Careers</a></li>
+          <li><a href="#press">Press</a></li>
+          <li><a href="#legal">Legal</a></li>
           <!-- <li>MetaDating © 2014</li> -->
         </ul>
       </div>
