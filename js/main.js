@@ -8,9 +8,9 @@ $(document).ready(function() {
   var fromTop = 0;
   var completeCalled = false;
 
-  $('.scan').click(function() {
+  // $('.scan').click(function() {
     initWebcam();
-  });
+  // });
 
   $('footer .links a').click(function() {
     openFooter($(this));
@@ -101,31 +101,13 @@ function initWebcam() {
       userMedia({video:true}, function(localMediaStream) {
         webcam.src = window.URL.createObjectURL(localMediaStream);
         webcam.onloadedmetadata = function(e) {
-
-        setTimeout(function() {
-          var textLife = 1500;
           $('#authorize').addClass('open');
-            $('#authTxt span').each(function(i) {
-              setTimeout(function() {
-                $('#authTxt span:eq('+i+')').css({display:'table'});
-                $('#authTxt span:eq('+(i-1)+')').css({display:'none'});
-              },textLife*i);
-            });
-            setTimeout(function() {
-              $('#authorize').addClass('close');
-              setTimeout(function() {
-                tracking = false;
-                $('#authorize').remove();
-              }, 600);
-            }, textLife*$('#authTxt span').length);
-        },1500);
-
-        setTimeout( "$('header').addClass('fixed');", 800);
-        setTimeout( "authorize()", 1500);
-        fitCam();
+          fitCam();
           $(window).resize(function() {
             fitCam();
           });
+          $('header').addClass('fixed');
+          authorize();
         };
       }, function() {
         console.log('Failed');
@@ -134,11 +116,11 @@ function initWebcam() {
   }
 
 function authorize() {
-  tracker = new clm.tracker();
+  tracker = new clm.tracker({useWebGL : true});
   tracker.init(pModel);
+  webcam.play();
   tracker.start(webcam);
-  positionLoop();
-  tracking = true;
+  // positionLoop();
   drawLoop();
 }
 
@@ -154,15 +136,11 @@ function positionLoop() {
 }
 
 function drawLoop() {
-  if(tracking) {
     requestAnimationFrame(drawLoop);
     ctx.clearRect(0,0,face.width,face.height);
-    tracker.draw(face);
-  } else {
-    tracker.stop();
-    webcam.src="";
-    webcam.remove();
-  }
+    if (tracker.getCurrentPosition()) {
+      tracker.draw(face);
+    }
 }
 
 function cursor() {
