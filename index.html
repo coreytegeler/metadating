@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/jquery.transit.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/models/model_pca_20_svm.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/models/model_pca_20_svm.js"></script>
     <script type="text/javascript" src="js/clmtrackr.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -21,23 +21,35 @@
   <body cz-shortcut-listen="true">
     <main>
       <header id="noText">
-        <div class="middle">
+        <div class="vert">
           <a href="#">
             <img class="logo center" src="img/logo-notext.svg"/>
           </a>
         </div>
         </header>
         <header id="text">
-        <div class="middle">
+        <div class="vert">
           <a href="#">
-            <img class="logo center scan" src="img/logo.svg"/>
+            <img class="logo center" src="img/logo.svg"/>
           </a>
+          <div id="startTxt">
+            <div class="scan" id="startBtn">
+              Start now!
+            </div>
+          </div>
         </div>
       </header>
       <!-- <canvas id="nodes" background="#ed1c24" resize></canvas> -->
       <section id="authorize">
         <div id="detection">
           <div class="inner">
+            <div id="instructions">
+              <div class="vert">
+                <h1>Smile!</h1>
+                <span>and allow permission to access your webcam</span>
+              </div>
+            </div>
+
             <div id="detectionOverlay">
               <canvas width="500" height="400" id="face"></canvas>
             </div>

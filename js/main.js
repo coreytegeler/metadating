@@ -8,20 +8,86 @@ $(document).ready(function() {
   var fromTop = 0;
   var completeCalled = false;
 
-  // $('.scan').click(function() {
+  $('.scan').click(function() {
+    $('main header').addClass('fixed');
+    $('#instructions').addClass('show');
+    $('#startTxt').remove();
     initWebcam();
-  // });
+  });
 
   $('footer .links a').click(function() {
     openFooter($(this));
   });
-
-  // $('footer .toggle').click(function() {
-  //   $('footer').toggleClass('show');
-  // });
 });
 
+function initWebcam() {
+  if (Modernizr.getusermedia) {
+    var userMedia = Modernizr.prefixed('getUserMedia', navigator);
+    userMedia({video:true}, function(localMediaStream) {
+      stream = localMediaStream;
+      webcam.src = window.URL.createObjectURL(stream);
+      $('#webcam').on('loadedmetadata', function() {
+        webcam.play();
+        fitCam();
+        scanProcess();
+        $(window).resize(function() {
+          fitCam();
+        });
+      });
+    }, function() {
+      console.log('Failed');
+    });
+  }
+}
 
+function authorize() {
+  tracker = new clm.tracker({useWebGL : true});
+  tracker.init(pModel);
+  tracker.start(webcam);
+  // positionLoop();
+  drawLoop();
+}
+
+function positionLoop() {
+  requestAnimationFrame(positionLoop);
+  var positions = tracker.getCurrentPosition();
+  positionString = "";
+  if(positions) {
+    for (var p=0;p<10;p++) {
+      positionString += positions[p][0].toFixed(2)+","+positions[p][1].toFixed(2);
+    }
+  }
+}
+
+function drawLoop() {
+    requestAnimationFrame(drawLoop);
+    ctx.clearRect(0,0,face.width,face.height);
+    if (tracker.getCurrentPosition()) {
+      tracker.draw(face);
+    }
+}
+
+function scanProcess() {
+  $('#authorize').addClass('open');
+  setTimeout(function() {
+    authorize();
+    var textLife = 1500;
+    $('#authorize').addClass('open');
+    $('#authTxt span').each(function(i) {
+      setTimeout(function() {
+        $('#authTxt span:eq('+i+')').css({display:'table'});
+        $('#authTxt span:eq('+(i-1)+')').css({display:'none'});
+      },textLife*i);
+    });
+    setTimeout(function() {
+      $('#authTxt').remove();
+      // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
+      // console.log(webcamImageData);
+      // var webcamImage = new Image(webcamImageData);
+      // stream.stop();
+    }, textLife*$('#authTxt span').length);
+  },100);
+}
 
 $(window).resize(function() {
   fitSections();
@@ -56,6 +122,7 @@ function winH() {
 function winW() {
   return window.innerWidth;
 }
+
 function openFooter(link) {
   var selected = link.attr('href').substring(1);
   var page = $('.footerPage#' + selected);
@@ -93,54 +160,6 @@ function openFooter(link) {
       $('body').removeClass('openFooter');
     });
   }
-
-}
-function initWebcam() {
-    if (Modernizr.getusermedia) {
-      var userMedia = Modernizr.prefixed('getUserMedia', navigator);
-      userMedia({video:true}, function(localMediaStream) {
-        webcam.src = window.URL.createObjectURL(localMediaStream);
-        $('#webcam').on('loadedmetadata', function() {
-          $('#authorize').addClass('open'); 
-          $('main header').addClass('fixed');
-          authorize();
-          fitCam();
-          $(window).resize(function() {
-            fitCam();
-          });
-        });
-      }, function() {
-        console.log('Failed');
-      });
-    }
-  }
-
-function authorize() {
-  tracker = new clm.tracker({useWebGL : true});
-  tracker.init(pModel);
-  webcam.play();
-  tracker.start(webcam);
-  // positionLoop();
-  drawLoop();
-}
-
-function positionLoop() {
-  requestAnimationFrame(positionLoop);
-  var positions = tracker.getCurrentPosition();
-  positionString = "";
-  if(positions) {
-    for (var p=0;p<10;p++) {
-      positionString += positions[p][0].toFixed(2)+","+positions[p][1].toFixed(2);
-    }
-  }
-}
-
-function drawLoop() {
-    requestAnimationFrame(drawLoop);
-    ctx.clearRect(0,0,face.width,face.height);
-    if (tracker.getCurrentPosition()) {
-      tracker.draw(face);
-    }
 }
 
 function cursor() {
@@ -149,5 +168,7 @@ function cursor() {
     console.log(cursor);
   });
 }
+
+
 
 
