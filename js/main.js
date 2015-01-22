@@ -12,8 +12,8 @@ $(document).ready(function() {
     $('main header').addClass('fixed');
     // $('#instructions').addClass('show');
     $('#circle').addClass('open');
-    // $('#startTxt').remove();
-    // initWebcam();
+    $('#startTxt').remove();
+    initWebcam();
   });
 
   $('footer .links a').click(function() {
@@ -69,11 +69,10 @@ function drawLoop() {
 }
 
 function scanProcess() {
-  $('#authorize').addClass('open');
+  $('#authorize').addClass('scanning');
   setTimeout(function() {
     authorize();
     var textLife = 1500;
-    $('#authorize').addClass('open');
     $('#authTxt span').each(function(i) {
       setTimeout(function() {
         $('#authTxt span:eq('+i+')').css({display:'table'});

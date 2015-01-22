@@ -228,30 +228,37 @@ header.fixed a img.logo {
 	display: table;
 	font-family: 'Noto Sans', sans-serif;
 	text-align: center;
-	color: white;
-	opacity: 0;
-	transform: scale(0);
-	-moz-transform: scale(0);
-	-webkit-transform: scale(0);
+	color: #ed1c24;
+	font-weight: 700;
+	z-index: 100; /*in front of webcam*/
+	background: white;
 
-	transition: all 150ms ease-in-out 400ms;
-	-moz-transition: all 150ms ease-in-out 400ms;
-	-webkit-transition: all 150ms ease-in-out 400ms;
+	transition: all 150ms ease-in-out;
+	-moz-transition: all 150ms ease-in-out;
+	-webkit-transition: all 150ms ease-in-out;
 }
-#detection .inner #instructions.show {
-	opacity: 1;
+.show #detection .inner #instructions {
 	transform: scale(1);
 	-moz-transform: scale(1);
 	-webkit-transform: scale(1);
 }
+.scanning #detection .inner #instructions {
+	/*transform: scale(0);
+	-moz-transform: scale(0);
+	-webkit-transform: scale(0);*/
+	opacity: 0;
+	background: transparent;
+}
 #detection .inner #instructions h1 {
 	font-size: 70px;
+	line-height: 70px;
 	margin: 0;
-	font-weight: 700;
 }
 #detection .inner #instructions span {
 	font-size: 15px;
-	font-weight: 400;
+	width: 230px;
+	display: table;
+	margin: auto;
 }
 #detectionOverlay {
 	position: absolute;
@@ -263,16 +270,23 @@ header.fixed a img.logo {
 	height: 100%;
 	min-width: 100%;
 	min-height: 100%;*/
+	display: none;
 }
 #webcam {
+	display: none;
 	position: absolute;
 	z-index: 99;
-	/*shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);*/
+}
+.scanning #webcam, .scanning #face{
+	display: block;
+}
+.scanning #webcam {
+	opacity: 1;
 }
 #circle {
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
+  	overflow: hidden;
 }
 #circle.open {
 	background: white;
