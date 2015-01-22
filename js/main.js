@@ -100,15 +100,15 @@ function initWebcam() {
       var userMedia = Modernizr.prefixed('getUserMedia', navigator);
       userMedia({video:true}, function(localMediaStream) {
         webcam.src = window.URL.createObjectURL(localMediaStream);
-        webcam.onloadedmetadata = function(e) {
-          $('#authorize').addClass('open');
+        $('#webcam').on('loadedmetadata', function() {
+          $('#authorize').addClass('open'); 
+          $('main header').addClass('fixed');
+          authorize();
           fitCam();
           $(window).resize(function() {
             fitCam();
           });
-          $('header').addClass('fixed');
-          authorize();
-        };
+        });
       }, function() {
         console.log('Failed');
       });
