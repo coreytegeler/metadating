@@ -10,9 +10,10 @@ $(document).ready(function() {
 
   $('.scan').click(function() {
     $('main header').addClass('fixed');
-    $('#instructions').addClass('show');
-    $('#startTxt').remove();
-    initWebcam();
+    // $('#instructions').addClass('show');
+    $('#circle').addClass('open');
+    // $('#startTxt').remove();
+    // initWebcam();
   });
 
   $('footer .links a').click(function() {
@@ -28,8 +29,8 @@ function initWebcam() {
       webcam.src = window.URL.createObjectURL(stream);
       $('#webcam').on('loadedmetadata', function() {
         webcam.play();
-        fitCam();
         scanProcess();
+        fitCam();
         $(window).resize(function() {
           fitCam();
         });

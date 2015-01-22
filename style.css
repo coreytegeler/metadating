@@ -229,7 +229,6 @@ header.fixed a img.logo {
 	font-family: 'Noto Sans', sans-serif;
 	text-align: center;
 	color: white;
-	font-weight: 700;
 	opacity: 0;
 	transform: scale(0);
 	-moz-transform: scale(0);
@@ -246,11 +245,13 @@ header.fixed a img.logo {
 	-webkit-transform: scale(1);
 }
 #detection .inner #instructions h1 {
-	font-size: 30px;
+	font-size: 70px;
 	margin: 0;
+	font-weight: 700;
 }
 #detection .inner #instructions span {
-	font-size: 20px;
+	font-size: 15px;
+	font-weight: 400;
 }
 #detectionOverlay {
 	position: absolute;
@@ -266,14 +267,19 @@ header.fixed a img.logo {
 #webcam {
 	position: absolute;
 	z-index: 99;
+	/*shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);*/
+}
+#circle {
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
 }
-.open #webcam {
+#circle.open {
+	background: white;
 	animation: openCam 600ms linear 1 forwards;
 	-webkit-animation: openCam 600ms linear 1 forwards;
 }
-.close #webcam {
+#circle.close {
 	animation: closeCam 600ms linear 1 forwards;
 	-webkit-animation: closeCam 600ms linear 1 forwards;
 }
