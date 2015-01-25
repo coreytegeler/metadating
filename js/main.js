@@ -81,12 +81,12 @@ function scanProcess() {
     });
     setTimeout(function() {
       $('#authTxt').remove();
-      // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
-      // console.log(webcamImageData);
-      // var webcamImage = new Image(webcamImageData);
-      // stream.stop();
+      var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
+      console.log(webcamImageData);
+      var webcamImage = new Image(webcamImageData);
+      stream.stop();
     }, textLife*$('#authTxt span').length);
-  },100);
+  },0);
 }
 
 $(window).resize(function() {

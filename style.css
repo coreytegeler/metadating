@@ -270,7 +270,7 @@ header.fixed a img.logo {
 	height: 100%;
 	min-width: 100%;
 	min-height: 100%;*/
-	display: none;
+	/*display: none;*/
 }
 #webcam {
 	display: none;
@@ -290,8 +290,8 @@ header.fixed a img.logo {
 }
 #circle.open {
 	background: white;
-	animation: openCam 600ms linear 1 forwards;
-	-webkit-animation: openCam 600ms linear 1 forwards;
+	animation: openCam 800ms linear 1 forwards;
+	-webkit-animation: openCam 800ms linear 1 forwards;
 }
 #circle.close {
 	animation: closeCam 600ms linear 1 forwards;
@@ -405,7 +405,7 @@ section#authorize #authTxt span {
 	font-weight: 400;
 	display: none;
 }
-section#authorize.open #authTxt {
+section#authorize.scanning #authTxt {
 	opacity: 1;
 }
 footer {
