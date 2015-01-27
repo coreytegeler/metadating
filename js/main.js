@@ -10,9 +10,11 @@ $(document).ready(function() {
 
   $('.scan').click(function() {
     $('main header').addClass('fixed');
-    // $('#instructions').addClass('show');
     $('#circle').addClass('open');
     $('#startTxt').remove();
+    setTimeout(function() {
+      $('#notifications').html('Allow us to access your webcam and smile!');
+    },100);
     initWebcam();
   });
 
@@ -59,55 +61,65 @@ function positionLoop() {
     }
   }
 }
-
-
 var ec = new emotionClassifier();
 ec.init(emotionModel);
 var emotionData = ec.getBlank();
 var stop=false;
 function drawLoop() {
-    requestAnimFrame(drawLoop);
-    ctx.clearRect(0,0,face.width,face.height);
+  requestAnimFrame(drawLoop);
+  ctx.clearRect(0,0,face.width,face.height);
 
-    var cp = tracker.getCurrentParameters();      
-    var emotion = ec.meanPredict(cp);
+  var cp = tracker.getCurrentParameters();      
+  var emotion = ec.meanPredict(cp);
+  if (emotion) {
     var smile = emotion[3].value;
-    if (tracker.getCurrentPosition()) {
-      tracker.draw(face);
-      if (smile > 0.8) {
-        console.log('Smile!');
-      }
-
-      var accuracy = tracker.getScore();
-      if (accuracy > 0.8) {
-        console.log('Good!');
-      }
+  }
+  if (tracker.getCurrentPosition()) {
+    tracker.draw(face);
+    if (smile > 0.8) {
+      console.log('Smile! ' + smile);
     }
+
+    var accuracy = tracker.getScore();
+    if (accuracy > 0.8) {
+      console.log('Accurate! ' + accuracy);
+    }
+  }
 }
 
 function scanProcess() {
   $('#authorize').addClass('scanning');
-  setTimeout(function() {
-    tracker = new clm.tracker({useWebGL : true, scoreThreshold : 30});
-    tracker.init(pModel);
-    authorize();
-    var textLife = 1500;
-    $('#authTxt span').each(function(i) {
-      setTimeout(function() {
-        $('#authTxt span:eq('+i+')').css({display:'table'});
-        $('#authTxt span:eq('+(i-1)+')').css({display:'none'});
-      },textLife*i);
-    });
+  tracker = new clm.tracker({useWebGL : true, scoreThreshold : 30});
+  tracker.init(pModel);
+  authorize();
+  var txtLife = 1500;
+  authTxt = [
+    'Initializing facial detection...',
+    'Analyzing data...',
+    'Connecting to database...',
+    'Finding possible matches...',
+    'Authorizing identity...',
+    'Identity found!'
+  ];
+  for (var i = 0; i < authTxt.length; i++) {
+    var txt = authTxt[i];
+    notifyAuth(txt);
+  }
+
+  function notifyAuth(txt) {
     setTimeout(function() {
-      $('#authTxt').remove();
-      // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
-      // console.log(webcamImageData);
-      // var webcamImage = new Image(webcamImageData);
-      // stream.stop();
-      // tracker.stop();
-      
-    }, textLife*$('#authTxt span').length);
-  },0);
+      $('#notifications').html(txt);
+    },txtLife*i)
+  }
+
+  setTimeout(function() {
+    $('#notifications').html('');
+    // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
+    // console.log(webcamImageData);
+    // var webcamImage = new Image(webcamImageData);
+    // stream.stop();
+    // tracker.stop();
+  }, txtLife * authTxt.length);
 }
 
 $(window).resize(function() {
