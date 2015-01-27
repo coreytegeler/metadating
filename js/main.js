@@ -28,7 +28,6 @@ function initWebcam() {
       stream = localMediaStream;
       webcam.src = window.URL.createObjectURL(stream);
       $('#webcam').on('loadedmetadata', function() {
-        webcam.play();
         scanProcess();
         fitCam();
         $(window).resize(function() {
@@ -41,9 +40,10 @@ function initWebcam() {
   }
 }
 
+
+
 function authorize() {
-  tracker = new clm.tracker({useWebGL : true});
-  tracker.init(pModel);
+  webcam.play();
   tracker.start(webcam);
   // positionLoop();
   drawLoop();
@@ -60,17 +60,36 @@ function positionLoop() {
   }
 }
 
+
+var ec = new emotionClassifier();
+ec.init(emotionModel);
+var emotionData = ec.getBlank();
+var stop=false;
 function drawLoop() {
-    requestAnimationFrame(drawLoop);
+    requestAnimFrame(drawLoop);
     ctx.clearRect(0,0,face.width,face.height);
+
+    var cp = tracker.getCurrentParameters();      
+    var emotion = ec.meanPredict(cp);
+    var smile = emotion[3].value;
     if (tracker.getCurrentPosition()) {
       tracker.draw(face);
+      if (smile > 0.8) {
+        console.log('Smile!');
+      }
+
+      var accuracy = tracker.getScore();
+      if (accuracy > 0.8) {
+        console.log('Good!');
+      }
     }
 }
 
 function scanProcess() {
   $('#authorize').addClass('scanning');
   setTimeout(function() {
+    tracker = new clm.tracker({useWebGL : true, scoreThreshold : 30});
+    tracker.init(pModel);
     authorize();
     var textLife = 1500;
     $('#authTxt span').each(function(i) {
@@ -81,10 +100,12 @@ function scanProcess() {
     });
     setTimeout(function() {
       $('#authTxt').remove();
-      var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
-      console.log(webcamImageData);
-      var webcamImage = new Image(webcamImageData);
-      stream.stop();
+      // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
+      // console.log(webcamImageData);
+      // var webcamImage = new Image(webcamImageData);
+      // stream.stop();
+      // tracker.stop();
+      
     }, textLife*$('#authTxt span').length);
   },0);
 }
@@ -169,6 +190,29 @@ function cursor() {
   });
 }
 
+/* Provides requestAnimationFrame in a cross browser way. 
+https://github.com/auduno */
+window.requestAnimFrame = (function() {
+  return window.requestAnimationFrame ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame ||
+         window.oRequestAnimationFrame ||
+         window.msRequestAnimationFrame ||
+         function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+           return window.setTimeout(callback, 1000/60);
+         };
+})();
+
+/* Provides cancelRequestAnimationFrame in a cross browser way. 
+https://github.com/auduno */
+window.cancelRequestAnimFrame = (function() {
+  return window.cancelCancelRequestAnimationFrame ||
+         window.webkitCancelRequestAnimationFrame ||
+         window.mozCancelRequestAnimationFrame ||
+         window.oCancelRequestAnimationFrame ||
+         window.msCancelRequestAnimationFrame ||
+         window.clearTimeout;
+})();
 
 
 
