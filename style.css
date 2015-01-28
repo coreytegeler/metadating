@@ -92,7 +92,7 @@ header.fixed a img.logo {
 	bottom: 100px;
 	width: 100%;
 	height: 0;
-	background: url(/img/bar.png);
+	background: url(img/bar.png);
 	background-repeat: repeat-y;
 	background-size: 15px 1px;
 	background-position: center;
