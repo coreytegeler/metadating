@@ -41,25 +41,26 @@
           </div>
         </div>
       </header>
-      <!-- <canvas id="nodes" background="#ed1c24" resize></canvas> -->
       <section id="authorize">
         <div id="detection">
-          <div class="inner" id="circle">
-             <video width="500" height="400" id="webcam" autoplay></video>
-            <div id="smiley">
-              <div class="vert">
-                <img src="img/smiley.png"/>
+          <div class="inner">
+            <div id="bar"></div>
+            <div id="match">
+              <div id="matchCircle"></div>
+            </div>
+            <div id="circle">
+              <video width="500" height="400" id="webcam" autoplay></video>
+              <div id="smiley">
+                <div class="vert">
+                  <img src="img/smiley.png"/>
+                </div>
               </div>
-            </div>
-
-            <div id="detectionOverlay">
-              <canvas width="500" height="400" id="face"></canvas>
-            </div>
-            
+              <div id="detectionOverlay">
+                <canvas width="500" height="400" id="face"></canvas>
+              </div>
+            </div> 
           </div>
-          <div id="notifications">
-           
-          </div>
+          <div id="notifications"></div>
         </div>
       </section>
     </main>

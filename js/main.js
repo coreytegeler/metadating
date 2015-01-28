@@ -11,6 +11,7 @@ $(document).ready(function() {
   $('.scan').click(function() {
     $('main header').addClass('fixed');
     $('#circle').addClass('open');
+    $('#authorize').attr('class','instructing');
     $('#startTxt').remove();
     setTimeout(function() {
       $('#notifications').html('Allow us to access your webcam and smile!');
@@ -42,71 +43,127 @@ function initWebcam() {
   }
 }
 
+var tracker = new clm.tracker();
+function scanProcess() {
+  tracker.init(pModel);
+  $('#authorize').attr('class','scanning');
+  authorize();
+}
+
 function authorize() {
   webcam.play();
   tracker.start(webcam);
   drawLoop();
 }
 
-var ec = new emotionClassifier();
-ec.init(emotionModel);
-var emotionData = ec.getBlank();
-var stop=false;
+var tracking = 0;
+var stop = false;
 function drawLoop() {
-  requestAnimationFrame(drawLoop);
-  ctx.clearRect(0,0,face.width,face.height);
-
-  if (tracker.getCurrentPosition()) {
-    tracker.draw(face);
-  }
-
-  var cp = tracker.getCurrentParameters();      
-  var emotion = ec.meanPredict(cp);
-  if (emotion) {
-    var smile = emotion[3].value;
+  if(!stop) {
+    requestAnimationFrame(drawLoop);
+    ctx.clearRect(0,0,face.width,face.height);
+    if (tracker.getCurrentPosition()) {
+      tracker.draw(face);
+    }
     var accuracy = tracker.getScore();
-
-    if (smile > 0.8 && accuracy > 0.8) {
-      console.log('Smile: ' + smile + ' Accuracy: ' + accuracy);
+    if (accuracy < 0.6) {
+      $('#notifications').html('Please sit still with your face visible within the circle.');
+      $('#face').addClass('hide');
+      tracking = 0;
+    } else {
+      $('#face').removeClass('hide');
+      tracking=tracking+1;
+      if(tracking < 10) {
+        $('#notifications').html('Tracking your face...');
+      } else if (tracking < 50) {
+        $('#notifications').html('Analyzing facial features...');
+      } else if (tracking < 100) {
+        $('#notifications').html('Scanning through database...');
+      } else if (tracking < 400) {
+        $('#notifications').html('Locating possible matches...');
+      } else if (tracking < 450) {
+        confirmed();
+      }
     }
   }
 }
 
-
-var tracker = new clm.tracker();
-function scanProcess() {
-  
-  tracker.init(pModel);
-  $('#authorize').addClass('scanning');
-  authorize();
-  var txtLife = 1500;
-  authTxt = [
-    'Initializing facial detection...',
-    'Analyzing data...',
-    'Connecting to database...',
-    'Finding possible matches...',
-    'Authorizing identity...',
-    'Identity found!'
-  ];
-  for (var i = 0; i < authTxt.length; i++) {
-    var txt = authTxt[i];
-    notifyAuth(txt);
-  }
-
-  function notifyAuth(txt) {
-    setTimeout(function() {
-      $('#notifications').html(txt);
-    },txtLife*i)
-  }
-
+function confirmed() {
+  // tracker.stop();
+  // ctx.clearRect(0,0,face.width,face.height);
+  // webcam.pause();
+  // stream.stop();
+  $('#notifications').html('Identity confirmed!');
   setTimeout(function() {
-    $('#notifications').html('');
-    // var webcamImageData = ctx.getImageData(0,0,webcam.videoWidth,webcam.videoHeight).data;
-    // console.log(webcamImageData);
-    // var webcamImage = new Image(webcamImageData);
-    // stream.stop();
-    // tracker.stop();
-  }, txtLife * authTxt.length);
+    findMatch();
+  },800);
+}
+
+function findMatch() {
+  $('#notifications').html('Finding potential matches...');
+  setTimeout(function() {
+    $('#face').addClass('hide');
+    stop = true;
+
+    $('#notifications').html('Found a match!');
+    $('#authorize').attr('class','match');
+    howDoYouFeel();
+  }, 1000);
+}
+
+var ec = new emotionClassifier();
+ec.init(emotionModel);
+var emotionData = ec.getBlank();
+
+function howDoYouFeel() {
+  checkEmotion();
+}
+
+good = 0;
+bad = 0;
+var matchConfirmed = false;
+function checkEmotion() {
+  if(!matchConfirmed) {
+    requestAnimationFrame(checkEmotion);
+    ctx.clearRect(0,0,face.width,face.height);
+    var cp = tracker.getCurrentParameters();      
+    var emotion = ec.meanPredict(cp);
+    if (tracker.getCurrentPosition()) {
+      tracker.draw(face);
+      if (emotion) {
+        var angry = emotion[0].value;
+        var sad = emotion[1].value;
+        var surprised = emotion[2].value;
+        var happy = emotion[3].value;
+        if (happy > 0.6) {
+          good = good+1;
+          $('#matchCircle').css({backgroundColor : '#73EA83'});
+          if(good > 600) {
+            yes();
+          }
+        } else if (angry > 0.5 || sad > 0.8) {
+          bad = bad+1;
+          $('#matchCircle').css({backgroundColor : '#ccc'});
+          if(bad > 600) {
+            no();
+          }
+        } else {
+          good = 0;
+          bad = 0;
+          $('#matchCircle').css({backgroundColor : '#fff'});
+        }
+      }
+    }
+  } 
+}
+
+function yes() {
+  $('#matchCircle').css({backgroundColor : '#28EA44'});
+  matchConfirmed = true;
+}
+
+function no() {
+  $('#matchCircle').css({backgroundColor : '#000'});
 }
 
 $(window).resize(function() {
@@ -153,7 +210,6 @@ function openFooter(link) {
     if(page.hasClass('open')) {
 
       $('.footerPage.open').scrollTop(0);
-
 
       $('#logo').attr('src','img/logo.svg');
       $('header').removeClass('fixed');
