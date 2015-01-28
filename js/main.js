@@ -37,60 +37,47 @@ function initWebcam() {
         });
       });
     }, function() {
-      console.log('Failed');
+      alert('Failed');
     });
   }
 }
 
-
-
 function authorize() {
   webcam.play();
   tracker.start(webcam);
-  // positionLoop();
   drawLoop();
 }
 
-function positionLoop() {
-  requestAnimationFrame(positionLoop);
-  var positions = tracker.getCurrentPosition();
-  positionString = "";
-  if(positions) {
-    for (var p=0;p<10;p++) {
-      positionString += positions[p][0].toFixed(2)+","+positions[p][1].toFixed(2);
-    }
-  }
-}
 var ec = new emotionClassifier();
 ec.init(emotionModel);
 var emotionData = ec.getBlank();
 var stop=false;
 function drawLoop() {
-  requestAnimFrame(drawLoop);
+  requestAnimationFrame(drawLoop);
   ctx.clearRect(0,0,face.width,face.height);
+
+  if (tracker.getCurrentPosition()) {
+    tracker.draw(face);
+  }
 
   var cp = tracker.getCurrentParameters();      
   var emotion = ec.meanPredict(cp);
   if (emotion) {
     var smile = emotion[3].value;
-  }
-  if (tracker.getCurrentPosition()) {
-    tracker.draw(face);
-    if (smile > 0.8) {
-      console.log('Smile! ' + smile);
-    }
-
     var accuracy = tracker.getScore();
-    if (accuracy > 0.8) {
-      console.log('Accurate! ' + accuracy);
+
+    if (smile > 0.8 && accuracy > 0.8) {
+      console.log('Smile: ' + smile + ' Accuracy: ' + accuracy);
     }
   }
 }
 
+
+var tracker = new clm.tracker();
 function scanProcess() {
-  $('#authorize').addClass('scanning');
-  tracker = new clm.tracker({useWebGL : true, scoreThreshold : 30});
+  
   tracker.init(pModel);
+  $('#authorize').addClass('scanning');
   authorize();
   var txtLife = 1500;
   authTxt = [
@@ -201,30 +188,4 @@ function cursor() {
     console.log(cursor);
   });
 }
-
-/* Provides requestAnimationFrame in a cross browser way. 
-https://github.com/auduno */
-window.requestAnimFrame = (function() {
-  return window.requestAnimationFrame ||
-         window.webkitRequestAnimationFrame ||
-         window.mozRequestAnimationFrame ||
-         window.oRequestAnimationFrame ||
-         window.msRequestAnimationFrame ||
-         function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
-           return window.setTimeout(callback, 1000/60);
-         };
-})();
-
-/* Provides cancelRequestAnimationFrame in a cross browser way. 
-https://github.com/auduno */
-window.cancelRequestAnimFrame = (function() {
-  return window.cancelCancelRequestAnimationFrame ||
-         window.webkitCancelRequestAnimationFrame ||
-         window.mozCancelRequestAnimationFrame ||
-         window.oCancelRequestAnimationFrame ||
-         window.msCancelRequestAnimationFrame ||
-         window.clearTimeout;
-})();
-
-
 
