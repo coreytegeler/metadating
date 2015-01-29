@@ -89,19 +89,19 @@ header.fixed a img.logo {
 #detection #bar {
 	position: absolute;
 	left: 0;
-	bottom: 100px;
-	width: 100%;
-	height: 0;
+	top: 0;
+	height: 100%;
+	width: 0;
 	background: url(/img/bar.png);
-	background-repeat: repeat-y;
-	background-size: 15px 1px;
+	background-repeat: repeat-x;
+	background-size: 1px 10px;
 	background-position: center;
 	transition: all 300ms ease-in;
 	-moz-transition: all 300ms ease-in;
 	-webkit-transition: all 300ms ease-in;
 }
 .match #detection #bar {
-	height: 300px;
+	width: 300px;
 }
 #smiley {
 	position: absolute;
@@ -163,11 +163,12 @@ header.fixed a img.logo {
 	transition: all 250ms ease-in-out;
 	-moz-transition: all 250ms ease-in-out;
 	-webkit-transition: all 250ms ease-in-out;
-	transform: scale(.5) translateY(200px);
-	-moz-transform: scale(.5) translateY(200px);
-	-webkit-transform: scale(.5) translateY(200px);
+	transform: scale(.5) translateX(-325px);
+	-moz-transform: scale(.5) translateX(-325px);
+	-webkit-transform: scale(.5) translateX(-325px);
 }
 #circle {
+	shape-padding: 15px;
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
   	overflow: hidden;
@@ -183,10 +184,10 @@ header.fixed a img.logo {
 }
 #match{
 	position: absolute;
-	top: -150px;
-	left: 0;
+	top: 35px;
+	left: 250px;
 	width: 100%;
-	height: 200px;
+	height: 300px;
 }
 #matchCircle { 
 	display: table;
@@ -198,7 +199,7 @@ header.fixed a img.logo {
 	transform: scale(0);
 	-moz-transform: scale(0);
 	-webkit-transform: scale(0);
-	
+	border: solid 10px white;
 }
 .match #matchCircle { 
 	transition: transform 250ms ease-in-out 300ms;
@@ -301,22 +302,27 @@ header.fixed a img.logo {
 }
 
 section#authorize #notifications {
+	position: absolute;
+	width: 100%;
+}
+section#authorize #notifications div {
 	display: table;
 	margin: auto;
-	width: 100%;
-	height: 20px;
-	position: absolute;
-	font-family: 'Noto Sans', serif;
-	font-size:20px;
-	line-height:20px;
-	color: white;
-	padding: 0;
-	margin: auto;
-	font-weight: 400;
 	text-align: center;
+	font-weight: 400;
+	color: white;
+	font-family: 'Noto Sans', serif;
 }
-
-
+#notifications #head {
+	font-size:23px;
+}
+#notifications #sub {
+	font-size:17px;
+	padding-top: 8px;
+}
+#notifications .click:hover {
+	cursor: pointer;
+}
 .closeBanner {
 	width: 100%;
 	height: 140px;

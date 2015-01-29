@@ -14,7 +14,7 @@ $(document).ready(function() {
     $('#authorize').attr('class','instructing');
     $('#startTxt').remove();
     setTimeout(function() {
-      $('#notifications').html('Allow us to access your webcam and smile!');
+      $('#notifications #head').html('Allow us to access your webcam and smile!');
     },100);
     initWebcam();
   });
@@ -58,6 +58,7 @@ function authorize() {
 
 var tracking = 0;
 var stop = false;
+var pause = false;
 function drawLoop() {
   if(!stop) {
     requestAnimationFrame(drawLoop);
@@ -66,22 +67,28 @@ function drawLoop() {
       tracker.draw(face);
     }
     var accuracy = tracker.getScore();
-    if (accuracy < 0.6) {
-      $('#notifications').html('Please sit still with your face visible within the circle.');
+    if (accuracy < 0.6 && pause == false) {
+      $('#notifications #head').html('Please sit still with your face visible within the circle.');
+      $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
+      $('.click.restart').click(function() {
+        // tracker.reset(webcam);
+        $('#notifications #sub').html('');
+      });
       $('#face').addClass('hide');
       tracking = 0;
     } else {
       $('#face').removeClass('hide');
       tracking=tracking+1;
       if(tracking < 10) {
-        $('#notifications').html('Tracking your face...');
+        $('#notifications #sub').html('');
+        $('#notifications #head').html('Tracking your face...');
       } else if (tracking < 50) {
-        $('#notifications').html('Analyzing facial features...');
+        $('#notifications #head').html('Analyzing facial features...');
       } else if (tracking < 100) {
-        $('#notifications').html('Scanning through database...');
+        $('#notifications #head').html('Scanning through database...');
       } else if (tracking < 400) {
-        $('#notifications').html('Locating possible matches...');
-      } else if (tracking < 450) {
+        $('#notifications #head').html('Confirming your identity...');
+      } else if (tracking < 500) {
         confirmed();
       }
     }
@@ -93,21 +100,25 @@ function confirmed() {
   // ctx.clearRect(0,0,face.width,face.height);
   // webcam.pause();
   // stream.stop();
-  $('#notifications').html('Identity confirmed!');
+  $('#notifications #head').html('Identity confirmed!');
+  $('#notifications #sub').html('');
+  pause = true;
   setTimeout(function() {
     findMatch();
   },800);
 }
 
 function findMatch() {
-  $('#notifications').html('Finding potential matches...');
+  $('#notifications #head').html('Analyzing your data profile...');
   setTimeout(function() {
-    $('#face').addClass('hide');
-    stop = true;
-
-    $('#notifications').html('Found a match!');
-    $('#authorize').attr('class','match');
-    howDoYouFeel();
+    $('#notifications #head').html('Finding a match...');
+    setTimeout(function() {
+      $('#face').addClass('hide');
+      stop = true;
+      // $('#notifications #head').html('Found a match!');
+      $('#authorize').attr('class','match');
+      howDoYouFeel();
+    }, 600);
   }, 1000);
 }
 
@@ -138,13 +149,13 @@ function checkEmotion() {
         if (happy > 0.6) {
           good = good+1;
           $('#matchCircle').css({backgroundColor : '#73EA83'});
-          if(good > 600) {
+          if(good > 1000) {
             yes();
           }
         } else if (angry > 0.5 || sad > 0.8) {
           bad = bad+1;
-          $('#matchCircle').css({backgroundColor : '#ccc'});
-          if(bad > 600) {
+          $('#matchCircle').css({backgroundColor : '#ededed'});
+          if(bad > 1000) {
             no();
           }
         } else {
@@ -159,7 +170,7 @@ function checkEmotion() {
 
 function yes() {
   $('#matchCircle').css({backgroundColor : '#28EA44'});
-  matchConfirmed = true;
+  // matchConfirmed = true;
 }
 
 function no() {
