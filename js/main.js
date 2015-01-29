@@ -161,7 +161,7 @@ function checkEmotion() {
         } else {
           good = 0;
           bad = 0;
-          $('#matchCircle').css({backgroundColor : '#fff'});
+          $('#matchCircle').css({backgroundColor : '#ed1c24'});
         }
       }
     }
