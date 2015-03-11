@@ -7,8 +7,9 @@ $(document).ready(function() {
   cursor();
   var fromTop = 0;
   var completeCalled = false;
-
+  hasStarted = false;
   $('.scan').click(function() {
+    hasStarted = true;
     $('main header').addClass('fixed');
     $('#circle').addClass('open');
     $('#authorize').attr('class','instructing');
@@ -222,8 +223,12 @@ function openFooter(link) {
 
       $('.footerPage.open').scrollTop(0);
 
+      
       $('#logo').attr('src','img/logo.svg');
-      $('header').removeClass('fixed');
+      if(hasStarted != true) {
+        $('header').removeClass('fixed');
+      }
+
       page.removeClass('open');
       setTimeout(function() {
         $('body').removeClass('openFooter');
