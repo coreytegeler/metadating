@@ -16,20 +16,21 @@
     <script type="text/javascript" src="js/emotion_classifier.js"></script>
     <script type="text/javascript" src="js/models/emotionmodel.js"></script>
     <script type="text/javascript" src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/dataSources.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <!--  <script type="text/paperscript" src="js/nodes.js" canvas="nodes"></script> -->
     
 </head>
   <body cz-shortcut-listen="true">
     <main>
-      <header id="noText">
+      <div class="logoWrapper" id="noText">
         <div class="vert">
           <div>
             <img class="logo center" src="img/logo-notext.svg"/>
           </div>
         </div>
-        </header>
-        <header id="text">
+        </div>
+        <div class="logoWrapper" id="text">
         <div class="vert">
           <div>
             <img class="logo center" src="img/logo.svg"/>
@@ -40,31 +41,40 @@
             </div>
           </div>
         </div>
-      </header>
+      </div>
       <section id="authorize">
-        <div id="detection">
+        <div class="container">
           <div class="inner">
-            <div id="bar"></div>
-            <div id="match">
-              <div id="matchCircle"></div>
-            </div>
-            <div id="circle">
-              <video width="500" height="400" id="webcam" autoplay></video>
-              <div id="smiley">
-                <div class="vert">
-                  <img src="img/smiley.png"/>
+            <div id="detection">
+              <div id="bar"></div>
+              <div id="rightPanel">
+                
+                <div id="sources">
+                  <div class="title"></div>
+                  <ul></ul>
                 </div>
+                <!-- <div id="matchCircle"></div> -->
               </div>
-              <div id="detectionOverlay">
-                <canvas width="500" height="400" id="face"></canvas>
+              <div id="circle">
+                <video width="500" height="400" id="webcam" autoplay></video>
+                <div id="smiley">
+                  <div class="vert">
+                    <img src="img/smile.svg"/>
+                  </div>
+                </div>
+                <div id="detectionOverlay">
+                  <canvas width="500" height="400" id="face"></canvas>
+                </div>
+              </div> 
+            </div>
+          
+            <div id="notifications">
+              <div id="head">
+                <span class="text"></span>
               </div>
-            </div> 
+              <div id="sub"></div>
+            </div>
           </div>
-          <div id="notifications">
-            <div id="head"></div>
-            <div id="sub"></div>
-          </div>
-
         </div>
       </section>
     </main>

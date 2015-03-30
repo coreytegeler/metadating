@@ -10,12 +10,12 @@ $(document).ready(function() {
   hasStarted = false;
   $('.scan').click(function() {
     hasStarted = true;
-    $('main header').addClass('fixed');
+    $('main .logoWrapper').addClass('fixed');
     $('#circle').addClass('open');
     $('#authorize').attr('class','instructing');
     $('#startTxt').remove();
     setTimeout(function() {
-      $('#notifications #head').html('Allow us to access your webcam and smile!');
+      $('#notifications #head .text').html('Allow us to access your webcam and smile!');
     },100);
     initWebcam();
   });
@@ -25,6 +25,7 @@ $(document).ready(function() {
   });
 });
 
+var tracker = new clm.tracker();
 function initWebcam() {
   if (Modernizr.getusermedia) {
     var userMedia = Modernizr.prefixed('getUserMedia', navigator);
@@ -32,7 +33,11 @@ function initWebcam() {
       stream = localMediaStream;
       webcam.src = window.URL.createObjectURL(stream);
       $('#webcam').on('loadedmetadata', function() {
-        scanProcess();
+        tracker.init(pModel);
+        $('#authorize').attr('class','scanning');
+        webcam.play();
+        tracker.start(webcam);
+        drawLoop();
         fitCam();
         $(window).resize(function() {
           fitCam();
@@ -44,83 +49,92 @@ function initWebcam() {
   }
 }
 
-var tracker = new clm.tracker();
-function scanProcess() {
-  tracker.init(pModel);
-  $('#authorize').attr('class','scanning');
-  authorize();
-}
-
-function authorize() {
-  webcam.play();
-  tracker.start(webcam);
-  drawLoop();
-}
-
-var tracking = 0;
-var stop = false;
-var pause = false;
+var scanning = 0;
+var stopScanning = false;
+var pauseScanning = false;
 function drawLoop() {
-  if(!stop) {
+  if(!stopScanning) {
     requestAnimationFrame(drawLoop);
     ctx.clearRect(0,0,face.width,face.height);
     if (tracker.getCurrentPosition()) {
       tracker.draw(face);
     }
     var accuracy = tracker.getScore();
-    if (accuracy < 0.6 && pause == false) {
-      $('#notifications #head').html('Please sit still with your face visible within the circle.');
-      $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
-      $('.click.restart').click(function() {
-        // tracker.reset(webcam);
-        $('#notifications #sub').html('');
-      });
+    if (accuracy < 0.6 && pauseScanning == false) {
+      if($('#notifications #sub').html() != '') {
+        $('#notifications #head .text').html('Please sit still with your face visible within the circle.');
+        $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
+        $('.click.restart').click(function() {
+          // tracker.reset(webcam);
+          $('#notifications #sub').html('');
+        });
+      } 
       $('#face').addClass('hide');
-      tracking = 0;
+      scanning = 0;
     } else {
       $('#face').removeClass('hide');
-      tracking=tracking+1;
-      if(tracking < 10) {
-        $('#notifications #sub').html('');
-        $('#notifications #head').html('Tracking your face...');
-      } else if (tracking < 50) {
-        $('#notifications #head').html('Analyzing facial features...');
-      } else if (tracking < 100) {
-        $('#notifications #head').html('Scanning through database...');
-      } else if (tracking < 400) {
-        $('#notifications #head').html('Confirming your identity...');
-      } else if (tracking < 500) {
-        confirmed();
-      }
+      scanning=scanning+1;
+      authorizing();
     }
   }
 }
 
+dataSources = dataSources.sort(function() { return 0.5 - Math.random() });
+function authorizing() {
+  if(scanning == 80) {
+    $('#notifications #head .text').html('Stabalizing webcam image');
+    $('#notifications #sub').html('');
+  } else if (scanning == 100) {
+    $('#notifications #head .text').html('Analyzing facial features');
+  } else if (scanning == 500) {
+    $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
+  } else if (scanning == 800) {
+    $('#notifications #head .text').html('Confirming your identity');
+  } else if (scanning == 1000) {
+    $('#notifications #head .text').html('Identity confirmed!');
+  } else if (scanning == 1100) {
+    $('#notifications #head.text').html('Requesting data from sources');
+  } else if (scanning == 1210) {
+      scanSources();
+  }
+}
+
+function scanSources() {
+  pauseScanning = true;
+  $('#notifications #head .text').html('');
+  $('#rightPanel .title').html('Connecting to data sources');
+  $('#authorize').attr('class','checkingSources');
+  $.each(dataSources, function(i, dataSource) {
+    setTimeout(function() {
+      $('#sources ul').append('<li>' + dataSource + '</li>');
+      if(i > 30) {
+        $('#sources ul li:first-child').remove();
+      }
+    }, rand(80,50) * i);
+  });
+}
+
+function rand(max,min) {
+  var x = Math.floor(Math.random() * (max - min) + min);
+  return x;
+}
+
 function confirmed() {
-  // tracker.stop();
-  // ctx.clearRect(0,0,face.width,face.height);
-  // webcam.pause();
-  // stream.stop();
-  $('#notifications #head').html('Identity confirmed!');
-  $('#notifications #sub').html('');
-  pause = true;
-  setTimeout(function() {
+  
+  if (scanning == 1200) {
     findMatch();
-  },800);
+  }
 }
 
 function findMatch() {
-  $('#notifications #head').html('Analyzing your data profile...');
-  setTimeout(function() {
-    $('#notifications #head').html('Finding a match...');
+    $('#notifications #head').html('Finding a match');
     setTimeout(function() {
       $('#face').addClass('hide');
-      stop = true;
+      stopScanning = true;
       // $('#notifications #head').html('Found a match!');
       $('#authorize').attr('class','match');
       howDoYouFeel();
     }, 600);
-  }, 1000);
 }
 
 var ec = new emotionClassifier();
@@ -196,14 +210,6 @@ function fitCam() {
   $('#detectionOverlay').css({x: centerShift});
 }
 
-function catchHeader() {
-  $('header.fixed').addClass('caught');
-}
-
-function dropHeader() {
-  $('header.fixed').removeClass('caught');
-}
-
 function winH() {
   return window.innerHeight;
 }
@@ -222,11 +228,10 @@ function openFooter(link) {
     if(page.hasClass('open')) {
 
       $('.footerPage.open').scrollTop(0);
-
       
       $('#logo').attr('src','img/logo.svg');
       if(hasStarted != true) {
-        $('header').removeClass('fixed');
+        $('.logoWrapper').removeClass('fixed');
       }
 
       page.removeClass('open');
@@ -239,7 +244,7 @@ function openFooter(link) {
     }
   } else {
     $('#logo').attr('src','img/logo-notext.svg');
-    $('header').addClass('fixed');
+    $('.logoWrapper').addClass('fixed');
     page.addClass('open');
     setTimeout(function() {
       $('body').addClass('openFooter');
@@ -247,7 +252,7 @@ function openFooter(link) {
 
     page.children('.closeBanner').click(function(event) {
       $('#logo').attr('src','img/logo.svg');
-      $('header').removeClass('fixed');
+      $('.logoWrapper').removeClass('fixed');
       page.removeClass('open');
       $('body').removeClass('openFooter');
     });
