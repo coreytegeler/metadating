@@ -11,7 +11,7 @@ $(document).ready(function() {
   $('.scan').click(function() {
     hasStarted = true;
     $('main .logoWrapper').addClass('fixed');
-    $('#circle').addClass('open');
+    $('#detection').addClass('open');
     $('#authorize').attr('class','instructing');
     $('#startTxt').remove();
     setTimeout(function() {
@@ -61,13 +61,17 @@ function drawLoop() {
     }
     var accuracy = tracker.getScore();
     if (accuracy < 0.6 && pauseScanning == false) {
-      if($('#notifications #sub').html() != '') {
+      if($('#notifications #sub').html() == '') {
         $('#notifications #head .text').html('Please sit still with your face visible within the circle.');
         $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
+        
         $('.click.restart').click(function() {
           // tracker.reset(webcam);
           $('#notifications #sub').html('');
         });
+
+        $('#circleBorder').attr('class','pauseExpanding');
+
       } 
       $('#face').addClass('hide');
       scanning = 0;
@@ -82,6 +86,7 @@ function drawLoop() {
 dataSources = dataSources.sort(function() { return 0.5 - Math.random() });
 function authorizing() {
   if(scanning == 80) {
+    $('#circleBorder').attr('class','expanding');
     $('#notifications #head .text').html('Stabalizing webcam image');
     $('#notifications #sub').html('');
   } else if (scanning == 100) {
@@ -95,6 +100,7 @@ function authorizing() {
   } else if (scanning == 1100) {
     $('#notifications #head.text').html('Requesting data from sources');
   } else if (scanning == 1210) {
+      $('#circleBorder').attr('class','pauseExpanding');
       scanSources();
   }
 }
@@ -106,9 +112,13 @@ function scanSources() {
   $('#authorize').attr('class','checkingSources');
   $.each(dataSources, function(i, dataSource) {
     setTimeout(function() {
-      $('#sources ul').append('<li>' + dataSource + '</li>');
-      if(i > 30) {
-        $('#sources ul li:first-child').remove();
+      $('#module #sources ul').append('<li>' + dataSource + '</li>');
+      if(i > 15) {
+        $('#module #sources ul li:first-child').remove();
+      }
+      // if(i == dataSources.length - 1) {
+        $('#sources').fadeOut(100);
+        $('#authorize').addClass('showingMatch');
       }
     }, rand(80,50) * i);
   });
@@ -131,7 +141,7 @@ function findMatch() {
     setTimeout(function() {
       $('#face').addClass('hide');
       stopScanning = true;
-      // $('#notifications #head').html('Found a match!');
+      $('#notifications #head').html('Found a match!');
       $('#authorize').attr('class','match');
       howDoYouFeel();
     }, 600);

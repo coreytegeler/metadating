@@ -105,7 +105,7 @@ section {
 	width: 0;
 	background: url(/img/bar.png);
 	background-repeat: repeat-x;
-	background-size: 1px 10px;
+	background-size: 1px 5px;
 	background-position: center;
 	transition: all 200ms ease-in 300ms;
 	-o-transition: all 200ms ease-in 300ms;
@@ -177,62 +177,97 @@ section {
 	/*padding-top: 100px;
 	height: 400px !important;*/
 }
-.checkingSources #circle {
-	transition: all 250ms ease-in-out;
-	-o-transition: all 250ms ease-in-out;
-	-moz-transition: all 250ms ease-in-out;
-	-webkit-transition: all 250ms ease-in-out;
-	transform: scale(.5) translateX(-325px);
-	-o-transform: scale(.5) translateX(-325px);
-	-moz-transform: scale(.5) translateX(-325px);
-	-webkit-transform: scale(.5) translateX(-325px);
-}
 #circle {
 	shape-padding: 15px;
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
   	overflow: hidden;
 }
-#circle.open {
+.checkingSources #circle, .checkingSources #circleBorder {
+	transition: all 250ms ease-in-out;
+	-o-transition: all 250ms ease-in-out;
+	-moz-transition: all 250ms ease-in-out;
+	-webkit-transition: all 250ms ease-in-out;
+	transform: translateX(-225px);
+	-o-transform: translateX(-225px);
+	-moz-transform: translateX(-225px);
+	-webkit-transform: translateX(-225px);
+}
+#detection.open #circle {
 	background: white;
 	animation: openCam 800ms linear 1 forwards;
 	-webkit-animation: openCam 800ms linear 1 forwards;
 }
-#circle.close {
+#detection.close #circle {
 	animation: closeCam 600ms linear 1 forwards;
 	-webkit-animation: closeCam 600ms linear 1 forwards;
 }
+#circleBorder {
+	width: 359px;
+	height: 400px;
+	position: absolute;
+	background: white;
+	shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+  	overflow: hidden;
+}
+#detection.open #circleBorder {
+	animation: openCamBorder 800ms linear 1 forwards;
+	-webkit-animation: openCamBorder 800ms linear 1 forwards;
+}
+#circleBorder.expanding {
+	animation: expandCamBorder 800ms ease-in-out infinite !important;
+	-webkit-animation: expandCamBorder 800ms ease-in-out infinite !important;
+}
+#circleBorder.pauseExpanding {
+	animation: none !important;
+	-webkit-animation: none !important;
+	shape-inside: circle(calc(40% + 5px) at 50% 50%) !important;
+    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%) !important;
+    transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+}
+#detection.close #circleBorder {
+	animation: closeCamBorder 600ms linear 1 forwards;
+	-webkit-animation: closeCamBorder 600ms linear 1 forwards;
+}
 #rightPanel {
 	position: absolute;
-	top: 50px;
+	top: 0px;
 	left: 250px;
-	width: 100%;
-	height: 300px;
+	width: 300px;
+	height: 400px;
 }
-#rightPanel #sources {
+#rightPanel #module {
 	margin: auto;
 	color: white;
 	font-size:17px;
 	font-weight: 400;
 	padding: 5px;
-	background: #ed1c24;
-	border: 10px white solid;
+	background: rgba(252,53,134,1);
+	border: 5px white solid;
 	border-radius: 20px;
 	overflow: hidden;
 	width: 300px;
-	max-height: 270px;
+	height: 370px;
 	display: none;
 }
-#rightPanel #sources ul {
+#rightPanel #module #sources ul {
 	padding: 0;
 	margin: 0;
 	list-style: none;
 }
-#rightPanel #sources .title {
+#rightPanel #module .title {
 	font-size:23px;
 }
-.checkingSources #rightPanel #sources {
+.checkingSources #rightPanel #module {
 	display: block;
+}
+
+.showingMatch #rightPanel #module {
+	height: 300px;
+  	border-radius: 100%;
+  	margin-top: 40px;
 }
 
 #rightPanel #matchCircle { 
@@ -259,97 +294,6 @@ section {
 	-moz-transform: scale(1);
 	-webkit-transform: scale(1);
 }
-
-@-webkit-keyframes openCam {
-  0% {
-    shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	-webkit-clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(40% at 50% 50%);
-  	-webkit-clip-path: circle(40% at 50% 50%);
-  }
-}
-
-@keyframes openCam {
-  0% {
-    shape-inside: circle(0% at 50% 50%);
-  	clip-path: circle(0% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(40% at 50% 50%);
-  	clip-path: circle(40% at 50% 50%);
-  }
-}
-@-webkit-keyframes closeCam {
-  0% {
-    shape-inside: circle(40% at 50% 50%);
-  	-webkit-clip-path: circle(40% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	-webkit-clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
-  }
-}
-@-moz-keyframes closeCam {
-  0% {
-    shape-inside: circle(40% at 50% 50%);
-  	-moz-clip-path: circle(40% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	-moz-clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	-moz-clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	-moz-clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(0% at 50% 50%);
-  	-moz-clip-path: circle(0% at 50% 50%);
-  }
-}
-
 section#authorize #notifications {
 	position: absolute;
 	width: 100%;

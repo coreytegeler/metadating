@@ -1,0 +1,210 @@
+@-webkit-keyframes openCam {
+  0% {
+    shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	-webkit-clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(40% at 50% 50%);
+  	-webkit-clip-path: circle(40% at 50% 50%);
+  }
+}
+@keyframes openCam {
+  0% {
+    shape-inside: circle(0% at 50% 50%);
+  	clip-path: circle(0% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(40% at 50% 50%);
+  	clip-path: circle(40% at 50% 50%);
+  }
+}
+@-webkit-keyframes closeCam {
+  0% {
+    shape-inside: circle(40% at 50% 50%);
+  	-webkit-clip-path: circle(40% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	-webkit-clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	-webkit-clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(0% at 50% 50%);
+  	-webkit-clip-path: circle(0% at 50% 50%);
+  }
+}
+@keyframes closeCam {
+  0% {
+    shape-inside: circle(40% at 50% 50%);
+  	clip-path: circle(40% at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(38% at 50% 50%);
+  	clip-path: circle(38% at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(41% at 50% 50%);
+  	clip-path: circle(41% at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(0% at 50% 50%);
+  	clip-path: circle(0% at 50% 50%);
+  }
+}
+
+
+
+@-webkit-keyframes openCamBorder {
+  0% {
+    shape-inside: circle(calc(0% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(0% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(calc(38% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(38% + 5px) at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+  }
+}
+@keyframes openCamBorder {
+  0% {
+    shape-inside: circle(calc(0% + 5px) at 50% 50%);
+    clip-path: circle(calc(0% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    clip-path: circle(calc(41% + 5px) at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(calc(38% + 5px) at 50% 50%);
+    clip-path: circle(calc(38% + 5px) at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    clip-path: circle(calc(41% + 5px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    clip-path: circle(calc(40% + 5px) at 50% 50%);
+  }
+}
+@-webkit-keyframes closeCamBorder {
+  0% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(calc(38% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(38% + 5px) at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(0% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(0% + 5px) at 50% 50%);
+  }
+}
+@keyframes closeCamBorder {
+  0% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    clip-path: circle(calc(40% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    clip-path: circle(calc(41% + 5px) at 50% 50%);
+  }
+  70% {
+    shape-inside: circle(calc(38% + 5px) at 50% 50%);
+    clip-path: circle(calc(38% + 5px) at 50% 50%);
+  }
+  90% {
+    shape-inside: circle(calc(41% + 5px) at 50% 50%);
+    clip-path: circle(calc(41% + 5px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(0% + 5px) at 50% 50%);
+    clip-path: circle(calc(0% + 5px) at 50% 50%);
+  }
+}
+
+
+
+@-webkit-keyframes expandCamBorder {
+  0% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(40% + 7px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(40% + 10px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+  }
+}
+@keyframes expandCamBorder {
+  0% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    clip-path: circle(calc(40% + 5px) at 50% 50%);
+  }
+  50% {
+    shape-inside: circle(calc(40% + 7px) at 50% 50%);
+    clip-path: circle(calc(40% + 10px) at 50% 50%);
+  }
+  100% {
+    shape-inside: circle(calc(40% + 5px) at 50% 50%);
+    clip-path: circle(calc(40% + 5px) at 50% 50%);
+  }
+}
