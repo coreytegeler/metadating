@@ -188,6 +188,7 @@
   50% {
     shape-inside: circle(calc(40% + 7px) at 50% 50%);
     -webkit-clip-path: circle(-webkit-calc(40% + 10px) at 50% 50%);
+    background: rgb(242,53,134);
   }
   100% {
     shape-inside: circle(calc(40% + 5px) at 50% 50%);
@@ -202,6 +203,7 @@
   50% {
     shape-inside: circle(calc(40% + 7px) at 50% 50%);
     clip-path: circle(calc(40% + 10px) at 50% 50%);
+    background: rgb(242,53,134);
   }
   100% {
     shape-inside: circle(calc(40% + 5px) at 50% 50%);

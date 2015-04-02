@@ -90,12 +90,43 @@ section {
 	display: table-cell;
 	vertical-align: middle;
 }
-#authorize .container .inner, #authorize .container #circle{
+#authorize .container .inner, #authorize .container #circle {
 	width: 359px;
 	height: 400px;
 	display: block;
 	margin: auto;
 	position: relative;
+}
+#authorize .container #complete {
+	overflow:hidden;
+	height: 0;
+	width: 720px;
+	transition: height 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-o-transition: height 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-moz-transition: height 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-webkit-transition: height 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+}
+#authorize.showingMatch .container #complete {
+	height: 500px;
+	width: 100%;
+}
+#authorize .container #complete .inner {
+	width: 720px;
+	height: auto;
+	transition: transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-o-transition: -o-transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-moz-transition: -moz-transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	-webkit-transition: -webkit-transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000) 300;
+	transform: translateY(1000px);
+	-o-transform: translateY(1000px);
+	-moz-transform: translateY(1000px);
+	-webkit-transform: translateY(1000px);
+}
+#authorize .container #complete .inner {
+	transform: translateY(0px);
+	-o-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	-webkit-transform: translateY(0px);
 }
 #authorize .container #bar {
 	position: absolute;
@@ -206,6 +237,8 @@ section {
 	width: 359px;
 	height: 400px;
 	position: absolute;
+	top:0;
+	left: 0;
 	background: white;
 	shape-inside: circle(0% at 50% 50%);
   	-webkit-clip-path: circle(0% at 50% 50%);
@@ -424,7 +457,7 @@ section#authorize #notifications div {
 	margin: 30px auto;
 	display:none;
 }
-.footerPage h1 {
+.footerPage h1, #complete h1 {
 	font-family: 'Noto Sans', serif;
 	font-weight: 700;
 	font-size: 55px;
@@ -441,7 +474,7 @@ section#authorize #notifications div {
     cursor: default;
     text-align: center;
 }
-.footerPage h2 {
+.footerPage h2, #complete h2 {
 	font-family: 'Noto Sans', serif;
 	font-weight: 700;
 	font-size: 35px;
@@ -458,7 +491,7 @@ section#authorize #notifications div {
     cursor: default;
     text-align: center;
 }
-.footerPage h3 {
+.footerPage h3, #complete h3 {
 	font-family: 'Quando', serif;
 	font-weight: 400;
 	font-style: italic;
@@ -467,10 +500,10 @@ section#authorize #notifications div {
 	padding: 0;
 	display: inline;
 }
-.footerPage h3::after {
+.footerPage h3::after, #complete h3::after {
 	content: ' — ';
 }
-.footerPage span {
+.footerPage span, #complete span {
 	letter-spacing: 1px;
 	font-family: 'Quando', serif;
 	font-weight: 400;
@@ -481,7 +514,7 @@ section#authorize #notifications div {
     margin:5px 0 20px 0;
     max-width: 800px;
 }
-.footerPage p, .footerPage span {
+.footerPage p, .footerPage span, #complete p, #complete span {
 	letter-spacing: 1px;
 	font-family: 'Quando', serif;
 	font-weight: 400;
@@ -491,7 +524,7 @@ section#authorize #notifications div {
     text-justify: inter-word;
 	max-width: 800px;
 }
-.footerPage p {
+.footerPage p, #complete p {
     margin: 10px 0;
 }
 .footerPage p::selection,
@@ -501,10 +534,18 @@ section#authorize #notifications div {
 .footerPage p::-moz-selection,
 .footerPage span::-moz-selection,
 .footerPage p::-webkit-selection,
-.footerPage span::-webkit-selection {
+.footerPage span::-webkit-selection,
+#complete p::selection,
+#complete span::selection,
+#complete p::-o-selection,
+#complete span::-o-selection,
+#complete p::-moz-selection,
+#complete span::-moz-selection,
+#complete p::-webkit-selection,
+#complete span::-webkit-selection {
   background: #ed1c24;
 }
-.footerPage a {
+.footerPage a, #complete a {
 	font-family: 'Noto Sans', serif;
     color: white;
     font-weight: 700;

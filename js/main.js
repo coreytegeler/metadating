@@ -92,14 +92,14 @@ function authorizing() {
   } else if (scanning == 100) {
     $('#notifications #head .text').html('Analyzing facial features');
   } else if (scanning == 500) {
-    $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
-  } else if (scanning == 800) {
-    $('#notifications #head .text').html('Confirming your identity');
-  } else if (scanning == 1000) {
-    $('#notifications #head .text').html('Identity confirmed!');
-  } else if (scanning == 1100) {
-    $('#notifications #head.text').html('Requesting data from sources');
-  } else if (scanning == 1210) {
+  //   $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
+  // } else if (scanning == 800) {
+  //   $('#notifications #head .text').html('Confirming your identity');
+  // } else if (scanning == 1000) {
+  //   $('#notifications #head .text').html('Identity confirmed!');
+  // } else if (scanning == 1100) {
+  //   $('#notifications #head.text').html('Requesting data from sources');
+  // } else if (scanning == 1210) {
       $('#circleBorder').attr('class','pauseExpanding');
       scanSources();
   }
@@ -117,10 +117,11 @@ function scanSources() {
         $('#module #sources ul li:first-child').remove();
       }
       // if(i == dataSources.length - 1) {
+      if(i == 20) {
         $('#sources').fadeOut(100);
         $('#authorize').addClass('showingMatch');
       }
-    }, rand(80,50) * i);
+    }, rand(80, 50) * i);
   });
 }
 
