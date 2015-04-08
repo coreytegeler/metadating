@@ -10,13 +10,18 @@ $(document).ready(function() {
   hasStarted = false;
   $('.scan').click(function() {
     hasStarted = true;
-    $('main .logoWrapper').addClass('fixed');
-    $('#detection').addClass('open');
-    $('#authorize').attr('class','instructing');
-    $('#startTxt').remove();
     setTimeout(function() {
+      $('main .logoWrapper').addClass('fixed');
       $('#notifications #head .text').html('Allow us to access your webcam and smile!');
-    },100);
+      $('#notifications').addClass('show');
+      setTimeout(function() {
+        $('#detection').addClass('open');
+        setTimeout(function() {
+          $('#authorize').attr('class','instructing');
+          $('#startTxt').remove();
+        },200);
+      },200);
+    },200);
     initWebcam();
   });
 
@@ -92,14 +97,14 @@ function authorizing() {
   } else if (scanning == 100) {
     $('#notifications #head .text').html('Analyzing facial features');
   } else if (scanning == 500) {
-  //   $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
-  // } else if (scanning == 800) {
-  //   $('#notifications #head .text').html('Confirming your identity');
-  // } else if (scanning == 1000) {
-  //   $('#notifications #head .text').html('Identity confirmed!');
-  // } else if (scanning == 1100) {
-  //   $('#notifications #head.text').html('Requesting data from sources');
-  // } else if (scanning == 1210) {
+    $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
+  } else if (scanning == 800) {
+    $('#notifications #head .text').html('Confirming your identity');
+  } else if (scanning == 1000) {
+    $('#notifications #head .text').html('Identity confirmed!');
+  } else if (scanning == 1100) {
+    $('#notifications #head.text').html('Requesting data from sources');
+  } else if (scanning == 1210) {
       $('#circleBorder').attr('class','pauseExpanding');
       scanSources();
   }
@@ -116,10 +121,12 @@ function scanSources() {
       if(i > 15) {
         $('#module #sources ul li:first-child').remove();
       }
-      // if(i == dataSources.length - 1) {
-      if(i == 20) {
+      if(i == dataSources.length - 1) {
+      // if(i == 20) {
         $('#sources').fadeOut(100);
-        $('#authorize').addClass('showingMatch');
+        setTimeout(function() {
+          $('#authorize').addClass('completed');
+        }, 300);
       }
     }, rand(80, 50) * i);
   });
@@ -128,79 +135,6 @@ function scanSources() {
 function rand(max,min) {
   var x = Math.floor(Math.random() * (max - min) + min);
   return x;
-}
-
-function confirmed() {
-  
-  if (scanning == 1200) {
-    findMatch();
-  }
-}
-
-function findMatch() {
-    $('#notifications #head').html('Finding a match');
-    setTimeout(function() {
-      $('#face').addClass('hide');
-      stopScanning = true;
-      $('#notifications #head').html('Found a match!');
-      $('#authorize').attr('class','match');
-      howDoYouFeel();
-    }, 600);
-}
-
-var ec = new emotionClassifier();
-ec.init(emotionModel);
-var emotionData = ec.getBlank();
-
-function howDoYouFeel() {
-  checkEmotion();
-}
-
-good = 0;
-bad = 0;
-var matchConfirmed = false;
-function checkEmotion() {
-  if(!matchConfirmed) {
-    requestAnimationFrame(checkEmotion);
-    ctx.clearRect(0,0,face.width,face.height);
-    var cp = tracker.getCurrentParameters();      
-    var emotion = ec.meanPredict(cp);
-    if (tracker.getCurrentPosition()) {
-      tracker.draw(face);
-      if (emotion) {
-        var angry = emotion[0].value;
-        var sad = emotion[1].value;
-        var surprised = emotion[2].value;
-        var happy = emotion[3].value;
-        if (happy > 0.6) {
-          good = good+1;
-          $('#matchCircle').css({backgroundColor : '#73EA83'});
-          if(good > 1000) {
-            yes();
-          }
-        } else if (angry > 0.5 || sad > 0.8) {
-          bad = bad+1;
-          $('#matchCircle').css({backgroundColor : '#ededed'});
-          if(bad > 1000) {
-            no();
-          }
-        } else {
-          good = 0;
-          bad = 0;
-          $('#matchCircle').css({backgroundColor : '#ed1c24'});
-        }
-      }
-    }
-  } 
-}
-
-function yes() {
-  $('#matchCircle').css({backgroundColor : '#28EA44'});
-  // matchConfirmed = true;
-}
-
-function no() {
-  $('#matchCircle').css({backgroundColor : '#000'});
 }
 
 $(window).resize(function() {
