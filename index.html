@@ -22,7 +22,7 @@
     <!--  <script type="text/paperscript" src="js/nodes.js" canvas="nodes"></script> -->
     
 </head>
-  <body cz-shortcut-listen="true">
+  <body cz-shortcut-listen="true" class="home">
     <main>
       <div class="logoWrapper" id="noText">
         <div class="vert">
@@ -30,8 +30,8 @@
             <img class="logo center" src="img/logo-notext.svg"/>
           </div>
         </div>
-        </div>
-        <div class="logoWrapper" id="text">
+      </div>
+      <div class="logoWrapper" id="text">
         <div class="vert">
           <div>
             <img class="logo center" src="img/logo.svg"/>
@@ -41,6 +41,11 @@
               Start now!
             </div>
           </div>
+        </div>
+      </div>
+      <div id="error">
+        <div class="inner">
+          Sorry, this device is out of date.<br/>Please try MetaDating on a modern device.
         </div>
       </div>
       <section id="authorize">
@@ -71,7 +76,8 @@
                 <div id="detectionOverlay">
                   <canvas width="500" height="400" id="face"></canvas>
                 </div>
-              </div> 
+                <div id="network"></div>
+              </div>
             </div>
           
             <div id="notifications">
@@ -85,11 +91,11 @@
             <div class="inner">
               <h1>It's a match!</h1>
               <p>
-                We've looked through all of the data that has been collected from your online activity. We've learned what you like to eat, what you wear, who you're friends with and that weird thing that you watch every morning. With that, and much more, we found your data-backed partner of your dreams.
+                We've looked through all of the data that has been collected from your online activity. We've learned where you live, what you like to eat, what you wear, who you're friends with and all of the weird things we would not like to mention.
               </p>
               <h3>What next?</h3>
               <span>
-                A message was just sent from you to the device they use most often asking them on a date, while providing they can't reject.
+                Just wait! A message was just sent from you to your match. Our data shows that there is a very low chance of rejection. You will hear back from them soon. Thank you for MetaDating.
               </span>
             </div>
           </div>
@@ -105,25 +111,25 @@
               <div class="question">
                 <h1 id="what">What is MetaDating?</h1>
                 <p>
-                  MetaDating is the new standard for finding love. The new act of liberating your heart to soar in the Cloud.
+                  MetaDating is the new standard for finding romance. We look in your data to find your love.
                 </p>
               </div>
               <div class="question">
                 <h1 id="what">How does this work?</h1>
                 <p>
-                Ever since we’ve began sharing 64% of our daily activity with our favorite corporations, they have welcomed this data to get to know us better than we know ourselves! The law insists that we treat these corporate entities as people, thankfully, they aren’t required to do the same. This allows them, and the software that they run on, to avoid human error and the flaws of the emotionally defective brain, to make programmatic illuminations about each and every one of us. With this insight, services like MetaDating, allow us to thoughtlessly and effortlessly consume media, purchase products, and produce more data, while all of life’s hardships are managed through data-backed analytics and algorithmic decision making tools.
+                About 64% of your daily activity, and 82% of your personal preferences are shared with your favorite corporations. They have welcomed this data openheartedly so they can get to know us better than we know ourselves! The law insists that we treat these corporate entities as people, thankfully, they aren’t required to do the same. This allows them, and the software that they run on, to avoid human error and the flaws of the emotionally defective brain. They can make programmatic illuminations about each and every one of us. With this insight, online services allow us to thoughtlessly and effortlessly consume media, purchase products, and build relationships with help from data-backed analytics and algorithmic decision making tools.
                 </p>
               </div>
               <div class="question">
                 <h1 id="how">How do I MetaDate?</h1>
                   <h3>Confirm your identity</h3>
                   <span>
-                    When you're ready to find your true match, click START and allow us to access your webcam. Once initiated, sit still with your face in the Cydonia&#8482; circle so we can match you with your available data!
+                    When you're ready to find your true love, click START and allow us to access your webcam. Once initiated, sit still with your face in the circle. We will authorize your identity with Cydonia&#8482; facial recognition service so we know who you are.
                   </span>
                 <br><br>
                   <h3>Let us find your match</h3>
                   <span>
-                    After confirming who you are through Cydonia’s™ facial recognition service, we access all of your metadata to discover who you really are. Your optimal romantic partner is out there somewhere, and whether or not they’re looking for you, we’ll find them!
+                    Using our vast network of tracking and analytic services, we discover who you really are. Your optimal romantic partner is out there somewhere, and whether or not they’re looking for you, we’ll find them!
                   </span>
               </div>
             </div>
@@ -208,9 +214,9 @@
       <div class="toggle" data-cursor="up"></div>
       <div class="links">
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#support">Support</a></li>
-          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#" data-link="about">About</a></li>
+          <li><a href="#" data-link="support">Support</a></li>
+          <li><a href="#" data-link="privacy">Privacy</a></li>
           <li>MetaDating © 2019</li>
         </ul>
       </div>

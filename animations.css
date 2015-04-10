@@ -210,3 +210,21 @@
     clip-path: circle(calc(40% + 5px) at 50% 50%);
   }
 }
+
+
+@-webkit-keyframes networking {
+  0% {
+    background-position: 0 center;
+  } 
+  100% {
+    background-position: 4000px center;
+  } 
+}
+@keyframes networking {
+  0% {
+    background-position: 0 center;
+  } 
+  100% {
+    background-position: 4000px center;
+  } 
+}

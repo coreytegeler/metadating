@@ -1,30 +1,38 @@
 $(document).ready(function() {
-  webcam = document.getElementById('webcam');
-  overlay = $('#detectionOverlay');
-  face = document.getElementById('face');
-  ctx = face.getContext('2d');
-  fitSections();
-  cursor();
-  var fromTop = 0;
-  var completeCalled = false;
-  hasStarted = false;
-  $('.scan').click(function() {
-    hasStarted = true;
-    setTimeout(function() {
-      $('main .logoWrapper').addClass('fixed');
-      $('#notifications #head .text').html('Allow us to access your webcam and smile!');
-      $('#notifications').addClass('show');
+
+  $('body').addClass('init');
+
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+    $('body').addClass('mobile');
+  }
+  else {
+    webcam = document.getElementById('webcam');
+    overlay = $('#detectionOverlay');
+    face = document.getElementById('face');
+    ctx = face.getContext('2d');
+    fitSections();
+    var fromTop = 0;
+    var completeCalled = false;
+    $('.scan').click(function() {
+      $('body').removeClass('home');
+      hasStarted = true;
       setTimeout(function() {
-        $('#detection').addClass('open');
+        $('main .logoWrapper').addClass('fixed');
+        $('#notifications #head .text').html('Allow us to access your webcam and smile!');
+        $('#notifications').addClass('show');
         setTimeout(function() {
-          $('#authorize').attr('class','instructing');
-          $('#startTxt').remove();
+          $('#detection').addClass('open');
+          setTimeout(function() {
+            $('#authorize').attr('class','instructing');
+            $('#startTxt').remove();
+          },200);
         },200);
       },200);
-    },200);
-    initWebcam();
-  });
+      initWebcam();
+    });
+  }
 
+  hasStarted = false;
   $('footer .links a').click(function() {
     openFooter($(this));
   });
@@ -71,12 +79,9 @@ function drawLoop() {
         $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
         
         $('.click.restart').click(function() {
-          // tracker.reset(webcam);
-          $('#notifications #sub').html('');
+          window.location.reload();
         });
-
         $('#circleBorder').attr('class','pauseExpanding');
-
       } 
       $('#face').addClass('hide');
       scanning = 0;
@@ -164,7 +169,7 @@ function winW() {
 }
 
 function openFooter(link) {
-  var selected = link.attr('href').substring(1);
+  var selected = link.attr('data-link');
   var page = $('.footerPage#' + selected);
   console.log(selected);
 
@@ -174,7 +179,6 @@ function openFooter(link) {
 
       $('.footerPage.open').scrollTop(0);
       
-      $('#logo').attr('src','img/logo.svg');
       if(hasStarted != true) {
         $('.logoWrapper').removeClass('fixed');
       }
@@ -188,7 +192,6 @@ function openFooter(link) {
       page.addClass('open');
     }
   } else {
-    $('#logo').attr('src','img/logo-notext.svg');
     $('.logoWrapper').addClass('fixed');
     page.addClass('open');
     setTimeout(function() {
@@ -196,18 +199,11 @@ function openFooter(link) {
     }, 80);
 
     page.children('.closeBanner').click(function(event) {
-      $('#logo').attr('src','img/logo.svg');
-      $('.logoWrapper').removeClass('fixed');
+      if($('body').hasClass('home')) {
+        $('.logoWrapper').removeClass('fixed');
+      }
       page.removeClass('open');
       $('body').removeClass('openFooter');
     });
   }
 }
-
-function cursor() {
-  $('.cursor').hover(function() {
-    var cursor = $(this).data('cursor');
-    console.log(cursor);
-  });
-}
-
