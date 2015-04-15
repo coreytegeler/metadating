@@ -10,7 +10,7 @@ $(document).ready(function() {
     overlay = $('#detectionOverlay');
     face = document.getElementById('face');
     ctx = face.getContext('2d');
-    fitSections();
+    sizeMain();
     var fromTop = 0;
     var completeCalled = false;
     $('.scan').click(function() {
@@ -57,7 +57,7 @@ function initWebcam() {
         });
       });
     }, function() {
-      alert('Failed');
+      window.location.reload();
     });
   }
 }
@@ -97,19 +97,19 @@ dataSources = dataSources.sort(function() { return 0.5 - Math.random() });
 function authorizing() {
   if(scanning == 80) {
     $('#circleBorder').attr('class','expanding');
-    $('#notifications #head .text').html('Stabalizing webcam image');
+    $('#notifications #head .text').html('Stabalizing webcam image...');
     $('#notifications #sub').html('');
-  } else if (scanning == 100) {
-    $('#notifications #head .text').html('Analyzing facial features');
   } else if (scanning == 500) {
-    $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match');
-  } else if (scanning == 800) {
-    $('#notifications #head .text').html('Confirming your identity');
-  } else if (scanning == 1000) {
-    $('#notifications #head .text').html('Identity confirmed!');
-  } else if (scanning == 1100) {
-    $('#notifications #head.text').html('Requesting data from sources');
-  } else if (scanning == 1210) {
+  //   $('#notifications #head .text').html('Analyzing facial features...');
+  // } else if (scanning == 800) {
+  //   $('#notifications #head .text').html('Connecting to Cydonia&#8482; for identity match...');
+  // } else if (scanning == 1000) {
+  //   $('#notifications #head .text').html('Confirming your identity...');
+  // } else if (scanning == 1150) {
+  //   $('#notifications #head .text').html('Identity confirmed!');
+  // } else if (scanning == 1190) {
+  //   $('#notifications #head.text').html('Connecting to data sources...');
+  // } else if (scanning == 1210) {
       $('#circleBorder').attr('class','pauseExpanding');
       scanSources();
   }
@@ -118,7 +118,7 @@ function authorizing() {
 function scanSources() {
   pauseScanning = true;
   $('#notifications #head .text').html('');
-  $('#rightPanel .title').html('Connecting to data sources');
+  $('#rightPanel .title').html('Connecting data from:');
   $('#authorize').attr('class','checkingSources');
   $.each(dataSources, function(i, dataSource) {
     setTimeout(function() {
@@ -130,7 +130,7 @@ function scanSources() {
       // if(i == 20) {
         $('#sources').fadeOut(100);
         setTimeout(function() {
-          $('#authorize').addClass('completed');
+          $('body').addClass('completed');
         }, 300);
       }
     }, rand(80, 50) * i);
@@ -143,13 +143,11 @@ function rand(max,min) {
 }
 
 $(window).resize(function() {
-  fitSections();
+  sizeMain();
 });
 
-function fitSections() {
-  $('section').each(function() {
-    $(this).height(window.innerHeight);
-  });
+function sizeMain() {
+  $('main').height(window.innerHeight - 70);
 }
 
 function fitCam() {
