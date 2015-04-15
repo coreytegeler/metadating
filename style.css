@@ -11,13 +11,14 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #ed1c24;
-	transition: background 200ms ease;
-	-o-transition: background 200ms ease;
-	-moz-transition: background 200ms ease;
-	-webkit-transition: background 200ms ease;
 	min-width: 630px;
 	color: white;
 	font-family: 'Noto Sans', serif;
+	opacity: 0;
+	transition: opacity 1500ms ease-in 500ms;
+	-o-transition: opacity 1500ms ease-in 500ms;
+	-moz-transition: opacity 1500ms ease-in 500ms;
+	-webkit-transition: opacity 1500ms ease-in 500ms;
 }
 body * {
 	text-rendering: optimizeLegibility;
@@ -27,13 +28,6 @@ body * {
 	-webkit-font-smoothing: antialiased;
 	-o-osx-font-smoothing: grayscale;
 	-moz-osx-font-smoothing: grayscale;
-}
-body {
-	opacity: 0;
-	transition: opacity 400ms ease-in-out 400ms;
-	-o-transition: opacity 400ms ease-in-out 400ms;
-	-moz-transition: opacity 400ms ease-in-out 400ms;
-	-webkit-transition: opacity 400ms ease-in-out 400ms;
 }
 body.init  {
 	opacity: 1;
