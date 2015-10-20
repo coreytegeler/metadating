@@ -109,6 +109,9 @@
   30% {
     -webkit-transform: scale(1.01);
   }
+  50% {
+    -webkit-transform: scale(1);
+  }
   100% {
     -webkit-transform: scale(1);
   }
@@ -119,6 +122,9 @@
   }
   30% {
     transform: scale(1.01);
+  }
+  50% {
+    transform: scale(1);
   }
   100% {
     transform: scale(1);

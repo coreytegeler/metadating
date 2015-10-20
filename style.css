@@ -195,10 +195,10 @@ section {
 	z-index: 100; /*in front of webcam*/
 	opacity: 0;
 	background: transparent;
-	transition: all 150ms ease-in-out;
-	-o-transition: all 150ms ease-in-out;
-	-moz-transition: all 150ms ease-in-out;
-	-webkit-transition: all 150ms ease-in-out;
+	transition: all 800ms ease-in-out;
+	-o-transition: all 800ms ease-in-out;
+	-moz-transition: all 800ms ease-in-out;
+	-webkit-transition: all 800ms ease-in-out;
 }
 .show #smiley {
 	transform: scale(1);
@@ -222,8 +222,15 @@ section {
 	display: table;
 	z-index: 100;
 }
-.checkingSources #face, .checkingSources #webcam { 
+#face, .checkingSources #face, .checkingSources #webcam { 
 	opacity: 0;
+	transition: all 450ms 1000ms ease-in-out;
+	-o-transition: all 450ms 1000ms ease-in-out;
+	-moz-transition: all 450ms 1000ms ease-in-out;
+	-webkit-transition: all 450ms 1000ms ease-in-out;
+}
+.scanning #face {
+	opacity: 1;
 }
 #webcam {
 	display: block;
@@ -363,16 +370,16 @@ section {
 	height: 325px;
 	width: 325px;
   	border-radius: 100%;
-  	transition: all 250ms ease-in-out;
-	-o-transition: all 250ms ease-in-out;
-	-moz-transition: all 250ms ease-in-out;
-	-webkit-transition: all 250ms ease-in-out;
+  	transition: all 550ms ease-in-out;
+	-o-transition: all 550ms ease-in-out;
+	-moz-transition: all 550ms ease-in-out;
+	-webkit-transition: all 550ms ease-in-out;
 	background-image: url(img/heart.svg);
 	background-size: 70%;
 	background-position: center;
 	background-repeat: no-repeat;
-	animation: heartBeat 350ms linear infinite;
-	-webkit-animation: heartBeat 350ms linear infinite;
+	animation: heartBeat 550ms linear infinite;
+	-webkit-animation: heartBeat 550ms linear infinite;
 }
 
 #rightPanel #matchCircle { 
