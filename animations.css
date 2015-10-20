@@ -1,213 +1,121 @@
-@-webkit-keyframes openCam {
+@-webkit-keyframes popUp {
   0% {
-    shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
+    -webkit-transform: scale(0);
+  }
+  20% {
+    -webkit-transform: scale(1.05);
+  }
+  40% {
+    -webkit-transform: scale(1.04);
   }
   50% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	-webkit-clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
+    -webkit-transform: scale(1.045);
   }
   100% {
-    shape-inside: circle(40% at 50% 50%);
-  	-webkit-clip-path: circle(40% at 50% 50%);
+    -webkit-transform: scale(1);
   }
 }
-@keyframes openCam {
+@keyframes popUp {
   0% {
-    shape-inside: circle(0% at 50% 50%);
-  	clip-path: circle(0% at 50% 50%);
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  40% {
+    transform: scale(1.04);
   }
   50% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
+    transform: scale(1.045);
   }
   100% {
-    shape-inside: circle(40% at 50% 50%);
-  	clip-path: circle(40% at 50% 50%);
-  }
-}
-@-webkit-keyframes closeCam {
-  0% {
-    shape-inside: circle(40% at 50% 50%);
-  	-webkit-clip-path: circle(40% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	-webkit-clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	-webkit-clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
-  }
-}
-@keyframes closeCam {
-  0% {
-    shape-inside: circle(40% at 50% 50%);
-  	clip-path: circle(40% at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(38% at 50% 50%);
-  	clip-path: circle(38% at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(41% at 50% 50%);
-  	clip-path: circle(41% at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(0% at 50% 50%);
-  	clip-path: circle(0% at 50% 50%);
+    transform: scale(1);
   }
 }
 
-
-
-@-webkit-keyframes openCamBorder {
+@-webkit-keyframes closeDown {
   0% {
-    shape-inside: circle(calc(0% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(0% + 5px) at 50% 50%);
+    -webkit-transform: scale(1);
+  }
+  20% {
+    -webkit-transform: scale(1.045);
+  }
+  40% {
+    -webkit-transform: scale(1.04);
   }
   50% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+    -webkit-transform: scale(1.05);
   }
   70% {
-    shape-inside: circle(calc(38% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(38% + 5px) at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
+    -webkit-transform: scale(0);
   }
   100% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+    -webkit-transform: scale(0);
   }
 }
-@keyframes openCamBorder {
+@keyframes closeDown {
   0% {
-    shape-inside: circle(calc(0% + 5px) at 50% 50%);
-    clip-path: circle(calc(0% + 5px) at 50% 50%);
+    transform: scale(1);
   }
   50% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    clip-path: circle(calc(41% + 5px) at 50% 50%);
+    transform: scale(1.045);
   }
   70% {
-    shape-inside: circle(calc(38% + 5px) at 50% 50%);
-    clip-path: circle(calc(38% + 5px) at 50% 50%);
+    transform: scale(1.04);
   }
   90% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    clip-path: circle(calc(41% + 5px) at 50% 50%);
+    transform: scale(1.05);
   }
   100% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    clip-path: circle(calc(40% + 5px) at 50% 50%);
+    transform: scale(0);
   }
 }
-@-webkit-keyframes closeCamBorder {
-  0% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(calc(38% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(38% + 5px) at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(41% + 5px) at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(calc(0% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(0% + 5px) at 50% 50%);
-  }
-}
-@keyframes closeCamBorder {
-  0% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    clip-path: circle(calc(40% + 5px) at 50% 50%);
-  }
-  50% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    clip-path: circle(calc(41% + 5px) at 50% 50%);
-  }
-  70% {
-    shape-inside: circle(calc(38% + 5px) at 50% 50%);
-    clip-path: circle(calc(38% + 5px) at 50% 50%);
-  }
-  90% {
-    shape-inside: circle(calc(41% + 5px) at 50% 50%);
-    clip-path: circle(calc(41% + 5px) at 50% 50%);
-  }
-  100% {
-    shape-inside: circle(calc(0% + 5px) at 50% 50%);
-    clip-path: circle(calc(0% + 5px) at 50% 50%);
-  }
-}
-
 
 
 @-webkit-keyframes expandCamBorder {
   0% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+    border-color: white;
   }
   50% {
-    shape-inside: circle(calc(40% + 7px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(40% + 10px) at 50% 50%);
-    background: rgb(242,53,134);
+    border-color: rgb(242,53,134);
   }
   100% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%);
+    border-color: white;
   }
 }
 @keyframes expandCamBorder {
   0% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    clip-path: circle(calc(40% + 5px) at 50% 50%);
+    border-color: white;
   }
   50% {
-    shape-inside: circle(calc(40% + 7px) at 50% 50%);
-    clip-path: circle(calc(40% + 10px) at 50% 50%);
-    background: rgb(242,53,134);
+    border-color: rgb(242,53,134);
   }
   100% {
-    shape-inside: circle(calc(40% + 5px) at 50% 50%);
-    clip-path: circle(calc(40% + 5px) at 50% 50%);
+    border-color: white;
+  }
+}
+
+
+@-webkit-keyframes heartBeat {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  30% {
+    -webkit-transform: scale(1.01);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

@@ -47,6 +47,7 @@ function initWebcam() {
       webcam.src = window.URL.createObjectURL(stream);
       $('#webcam').on('loadedmetadata', function() {
         tracker.init(pModel);
+        webcam.width = $(webcam).outerWidth();
         $('#authorize').attr('class','scanning');
         webcam.play();
         tracker.start(webcam);
@@ -73,7 +74,7 @@ function drawLoop() {
       tracker.draw(face);
     }
     var accuracy = tracker.getScore();
-    if (accuracy < 0.6 && pauseScanning == false) {
+    if (accuracy < 0.5 && pauseScanning == false) {
       if($('#notifications #sub').html() == '') {
         $('#notifications #head .text').html('Please sit still with your face visible within the circle.');
         $('#notifications #sub').html('Having issues? <span class="click restart">Restart</span>');
@@ -81,7 +82,7 @@ function drawLoop() {
         $('.click.restart').click(function() {
           window.location.reload();
         });
-        $('#circleBorder').attr('class','pauseExpanding');
+        // $('#circleBorder').attr('class','pauseExpanding');
       } 
       $('#face').addClass('hide');
       scanning = 0;
@@ -96,7 +97,7 @@ function drawLoop() {
 dataSources = dataSources.sort(function() { return 0.5 - Math.random() });
 function authorizing() {
   if(scanning == 80) {
-    $('#circleBorder').attr('class','expanding');
+    $('#circle').attr('class','expanding');
     $('#notifications #head .text').html('Stabalizing webcam image...');
     $('#notifications #sub').html('');
   } else if (scanning == 500) {
@@ -110,7 +111,7 @@ function authorizing() {
   // } else if (scanning == 1190) {
   //   $('#notifications #head.text').html('Connecting to data sources...');
   // } else if (scanning == 1210) {
-      $('#circleBorder').attr('class','pauseExpanding');
+      $('#circle').attr('class','pauseExpanding');
       scanSources();
   }
 }
@@ -118,7 +119,7 @@ function authorizing() {
 function scanSources() {
   pauseScanning = true;
   $('#notifications #head .text').html('');
-  $('#rightPanel .title').html('Connecting data from:');
+  $('#rightPanel .title').html('Collecting data from:');
   $('#authorize').attr('class','checkingSources');
   $.each(dataSources, function(i, dataSource) {
     setTimeout(function() {
@@ -133,7 +134,8 @@ function scanSources() {
           $('body').addClass('completed');
         }, 300);
       }
-    }, rand(80, 50) * i);
+    // }, rand(80, 50) * i);
+  }, i);
   });
 }
 
@@ -169,7 +171,6 @@ function winW() {
 function openFooter(link) {
   var selected = link.attr('data-link');
   var page = $('.footerPage#' + selected);
-  console.log(selected);
 
   var open = $('body').hasClass('openFooter');
   if(open) {

@@ -108,7 +108,6 @@ section {
 	padding-top: 120px;
 }
 .completed #authorize {
-	
 	transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
 	-o-transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
 	-moz-transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
@@ -119,25 +118,27 @@ section {
 	vertical-align: middle;
 }
 #authorize .container .inner, #authorize .container #circle {
-	width: 359px;
-	height: 400px;
+	width: 325px;
+	height: 325px;
 	display: block;
 	margin: auto;
 	position: relative;
 }
 #authorize .container #complete {
-	overflow:hidden;
-	height: 0px;
 	width: 100%;
+	height: 0px;
+	max-height: 0px;
+	overflow:hidden;
 	opacity: 0;
-	transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
-	-o-transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
-	-moz-transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
-	-webkit-transition: all 450ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+	transition: all 850ms 300ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+	-o-transition: all 850ms 300ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+	-moz-transition: all 850ms 300ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+	-webkit-transition: all 850ms 300ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
 
 .completed #authorize .container #complete {
 	opacity: 1;
+	max-height: 1200px;
 	height: auto;
 }
 #authorize .container #complete .inner {
@@ -221,6 +222,7 @@ section {
 	display: block;
 	position: absolute;
 	z-index: 99;
+	opacity: 0;
 }
 .instructing #webcam {
 	display: none;
@@ -240,12 +242,14 @@ section {
 	height: 400px !important;*/
 }
 #circle {
-	shape-padding: 15px;
-	shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
+	-webkit-transform: scale(0);
+	transform: scale(0);
+	-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	border-radius: 100%;
+	border: white solid 5px;
   	overflow: hidden;
 }
-.checkingSources #circle, .checkingSources #circleBorder {
+.checkingSources #circle {
 	transition: all 250ms ease-in-out;
 	-o-transition: all 250ms ease-in-out;
 	-moz-transition: all 250ms ease-in-out;
@@ -254,22 +258,34 @@ section {
 	-o-transform: translateX(-225px);
 	-moz-transform: translateX(-225px);
 	-webkit-transform: translateX(-225px);
+	animation: none !important;
+	-webkit-animation: none !important;
 }
 .checkingSources #circle {
 	background: #ed1c24 !important;
 }
 #detection.open #circle {
-	background-color: white;
-	animation: openCam 800ms linear 1 forwards;
-	-webkit-animation: openCam 800ms linear 1 forwards;
+	animation: popUp 800ms linear 1 forwards;
+	-webkit-animation: popUp 800ms linear 1 forwards;
 }
 #detection.close #circle {
-	animation: closeCam 600ms linear 1 forwards;
-	-webkit-animation: closeCam 600ms linear 1 forwards;
+	animation: closeDown 600ms linear 1 forwards;
+	-webkit-animation: closeDown 600ms linear 1 forwards;
+}
+#circle.expanding {
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	animation: expandCamBorder 800ms ease-in-out infinite !important;
+	-webkit-animation: expandCamBorder 800ms ease-in-out infinite !important;
+}
+#circle.pauseExpanding {
+	border: 5px solid white;
+    transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
 }
 #network {
-	height: 400px;
-	width: 400px;
+	height: 325px;
+	width: 325px;
 	display: none;
 	background-image: url(img/network.svg);
 	background-size: cover;
@@ -292,43 +308,12 @@ section {
 	-webkit-transition: background-position 500ms linear;
 	background-position: 0px center;
 }
-#circleBorder {
-	width: 359px;
-	height: 400px;
-	position: absolute;
-	top:0;
-	left: 0;
-	background: white;
-	shape-inside: circle(0% at 50% 50%);
-  	-webkit-clip-path: circle(0% at 50% 50%);
-  	overflow: hidden;
-}
-#detection.open #circleBorder {
-	animation: openCamBorder 800ms linear 1 forwards;
-	-webkit-animation: openCamBorder 800ms linear 1 forwards;
-}
-#circleBorder.expanding {
-	animation: expandCamBorder 800ms ease-in-out infinite !important;
-	-webkit-animation: expandCamBorder 800ms ease-in-out infinite !important;
-}
-#circleBorder.pauseExpanding {
-	animation: none !important;
-	-webkit-animation: none !important;
-	shape-inside: circle(calc(40% + 5px) at 50% 50%) !important;
-    -webkit-clip-path: circle(-webkit-calc(40% + 5px) at 50% 50%) !important;
-    transition: all 200ms ease-in-out;
-	-webkit-transition: all 200ms ease-in-out;
-}
-#detection.close #circleBorder {
-	animation: closeCamBorder 600ms linear 1 forwards;
-	-webkit-animation: closeCamBorder 600ms linear 1 forwards;
-}
 #rightPanel {
 	position: absolute;
 	top: 0px;
 	left: 250px;
 	width: 300px;
-	height: 400px;
+	height: 325px;
 }
 #rightPanel #module {
 	margin: auto;
@@ -341,8 +326,16 @@ section {
 	border-radius: 20px;
 	overflow: hidden;
 	width: 300px;
-	height: 370px;
+	height: 325px;
 	display: none;
+	transform: scale(0);
+	-o-transform: scale(0);
+	-moz-transform: scale(0);
+	-webkit-transform: scale(0);
+	transition: transition 250ms ease-in-out;
+	-o-transition: -o-transition 250ms ease-in-out;
+	-moz-transition: -moz-transition 250ms ease-in-out;
+	-webkit-transition: -webkit-transition 250ms ease-in-out;
 }
 #rightPanel #module #sources ul {
 	padding: 0;
@@ -354,13 +347,15 @@ section {
 }
 .checkingSources #rightPanel #module {
 	display: block;
+	animation: popUp 800ms linear 1 forwards;
+	-webkit-animation: popUp 800ms linear 1 forwards;
 }
 
 .completed #rightPanel #module {
 	background: #ed1c24;
-	height: 300px;
+	height: 325px;
+	width: 325px;
   	border-radius: 100%;
-  	margin-top: 40px;
   	transition: all 250ms ease-in-out;
 	-o-transition: all 250ms ease-in-out;
 	-moz-transition: all 250ms ease-in-out;
@@ -369,6 +364,8 @@ section {
 	background-size: 70%;
 	background-position: center;
 	background-repeat: no-repeat;
+	animation: heartBeat 350ms linear infinite;
+	-webkit-animation: heartBeat 350ms linear infinite;
 }
 
 #rightPanel #matchCircle { 
@@ -410,6 +407,7 @@ section#authorize #notifications {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	padding-top: 50px;
 	transition: transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
 	-o-transition: -o-transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
 	-moz-transition: -moz-transform 350ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
