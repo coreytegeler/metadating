@@ -48,11 +48,13 @@ function initWebcam() {
       $('#webcam').on('loadedmetadata', function() {
         tracker.init(pModel);
         webcam.width = $(webcam).outerWidth();
-        $('#authorize').attr('class','scanning');
         webcam.play();
         tracker.start(webcam);
         drawLoop();
         fitCam();
+        setTimeout(function() {
+          $('#authorize').attr('class','scanning');
+        },900);
         $(window).resize(function() {
           fitCam();
         });
@@ -134,8 +136,7 @@ function scanSources() {
           $('body').addClass('completed');
         }, 300);
       }
-    // }, rand(80, 50) * i);
-  }, i);
+    }, rand(80, 50) * i);
   });
 }
 
