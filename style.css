@@ -173,7 +173,7 @@ section {
 	top: 0;
 	height: 100%;
 	width: 0;
-	background: url(/img/bar.png);
+	background: url(img/bar.png);
 	background-repeat: repeat-x;
 	background-size: 1px 5px;
 	background-position: center;

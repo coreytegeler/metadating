@@ -59,8 +59,9 @@ function initWebcam() {
           fitCam();
         });
       });
-    }, function() {
-      window.location.reload();
+    }, function(e) {
+      console.log(e);
+      // window.location.reload();
     });
   }
 }
