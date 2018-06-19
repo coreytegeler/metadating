@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log('!');
   $('body').addClass('init');
 
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
@@ -60,7 +59,6 @@ function initWebcam() {
         });
       });
     }, function(e) {
-      console.log(e);
       // window.location.reload();
     });
   }
